@@ -23,8 +23,6 @@ namespace PhotoImpression
         public MainWindow()
         {
             InitializeComponent();
-
-            MessageBox.Show("test");
         }
     }
 }
