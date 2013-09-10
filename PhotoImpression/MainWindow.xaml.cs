@@ -23,6 +23,8 @@ namespace PhotoImpression
         public MainWindow()
         {
             InitializeComponent();
+
+
         }
     }
 }
