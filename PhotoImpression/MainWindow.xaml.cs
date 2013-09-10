@@ -24,7 +24,7 @@ namespace PhotoImpression
         {
             InitializeComponent();
 
-
+            MessageBox.Show("test");
         }
     }
 }
