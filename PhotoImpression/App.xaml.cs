@@ -13,5 +13,6 @@ namespace PhotoImpression
     /// </summary>
     public partial class App : Application
     {
+
     }
 }
