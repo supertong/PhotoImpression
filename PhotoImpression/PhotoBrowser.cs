@@ -9,6 +9,10 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace PhotoImpression
 {
@@ -17,10 +21,10 @@ namespace PhotoImpression
         private int counter;    //counter for record the index of image
         private String[] images; //array of string store image path
         private int degree;     //controll the image rotate degree,
-        private Image imageContainer;   //container for the images
+        private System.Windows.Controls.Image imageContainer;   //container for the images
 
         //constructor
-        public PhotoBrowser(object sender, RoutedEventArgs e, Image container) {
+        public PhotoBrowser(object sender, RoutedEventArgs e, System.Windows.Controls.Image container) {
             var path = folderBrowser(sender, e);
             
             while (path == null)
@@ -32,6 +36,7 @@ namespace PhotoImpression
 
             imageContainer = container;
 
+            
             //display the first image
             imageContainer.Source = this.retriveImage(images[0]);
 
@@ -76,21 +81,40 @@ namespace PhotoImpression
             return files.ToArray();
         }
 
+        //functions tobitmapsource from emug cv
+        [DllImport("gdi32")]
+        private static extern int DeleteObject(IntPtr o);
+
+        /// <summary>
+        /// Convert an IImage to a WPF BitmapSource. The result can be used in the Set Property of Image.Source
+        /// </summary>
+        /// <param name="image">The Emgu CV Image</param>
+        /// <returns>The equivalent BitmapSource</returns>
+        private static BitmapSource ToBitmapSource(IImage image)
+        {
+            using (System.Drawing.Bitmap source = image.Bitmap)
+            {
+                IntPtr ptr = source.GetHbitmap(); //obtain the Hbitmap
+
+                BitmapSource bs = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                    ptr,
+                    IntPtr.Zero,
+                    Int32Rect.Empty,
+                    System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
+
+                DeleteObject(ptr); //release the HBitmap
+                return bs;
+            }
+        }
+
         /*
          * function to return image to image container by image path with name
          * **/
-        private BitmapImage retriveImage(string imgName)
+        private BitmapSource retriveImage(string imgName)
         {
-            BitmapImage image = new BitmapImage();
-            using (System.IO.FileStream stream = File.OpenRead(imgName))
-            {
-                image.BeginInit();
-                image.StreamSource = stream;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.EndInit();
-            }
-
-            return image;
+            Image<Bgr, Byte> image = new Image<Bgr, byte>(imgName);
+            
+            return ToBitmapSource(image);
         }
 
         public void autoRunImage()
