@@ -29,7 +29,7 @@ namespace PhotoImpression
         private void onLoad(object sender, RoutedEventArgs e)
         {
             browser = new PhotoBrowser(sender, e, imageContainer);
-            browser.autoRunImage();
+            //browser.autoRunImage();
         }
 
         private void nextButton_Click(object sender, RoutedEventArgs e)
@@ -50,6 +50,19 @@ namespace PhotoImpression
         private void leftRotate_Click(object sender, RoutedEventArgs e)
         {
             browser.LeftRotate();
+        }
+
+        private void imageContainer_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            Point pos = (Point)e.GetPosition(this);
+
+            if (e.Delta > 0)
+            {
+                browser.ZoomIn(1.2,pos);
+            }
+            else {
+                browser.ZoomOut(1.2,pos);
+            }
         }
    }
 }

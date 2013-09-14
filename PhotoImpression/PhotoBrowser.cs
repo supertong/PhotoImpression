@@ -39,6 +39,8 @@ namespace PhotoImpression
             
             //display the first image
             imageContainer.Source = this.retriveImage(images[0]);
+            imageContainer.Width = 500;
+            imageContainer.Height = 500;
 
             counter = 0;
             degree = 0;
@@ -81,32 +83,6 @@ namespace PhotoImpression
             return files.ToArray();
         }
 
-        //functions tobitmapsource from emug cv
-        [DllImport("gdi32")]
-        private static extern int DeleteObject(IntPtr o);
-
-        /// <summary>
-        /// Convert an IImage to a WPF BitmapSource. The result can be used in the Set Property of Image.Source
-        /// </summary>
-        /// <param name="image">The Emgu CV Image</param>
-        /// <returns>The equivalent BitmapSource</returns>
-        private static BitmapSource ToBitmapSource(IImage image)
-        {
-            using (System.Drawing.Bitmap source = image.Bitmap)
-            {
-                IntPtr ptr = source.GetHbitmap(); //obtain the Hbitmap
-
-                BitmapSource bs = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
-                    ptr,
-                    IntPtr.Zero,
-                    Int32Rect.Empty,
-                    System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
-
-                DeleteObject(ptr); //release the HBitmap
-                return bs;
-            }
-        }
-
         /*
          * function to return image to image container by image path with name
          * **/
@@ -130,6 +106,17 @@ namespace PhotoImpression
             this.NextPhoto();
         }
 
+
+        public void ZoomIn(double scale,System.Windows.Point pos) {
+
+            imageContainer.Width = imageContainer.Width * scale;
+            imageContainer.Height = imageContainer.Height * scale;
+        }
+
+        public void ZoomOut(double scale,System.Windows.Point pos) {
+            imageContainer.Width = imageContainer.Width / scale;
+            imageContainer.Height = imageContainer.Height / scale;
+        }
 
         /**
          rotate image to right
@@ -156,6 +143,7 @@ namespace PhotoImpression
             if (counter >= images.Length)
                 counter = 0;
             imageContainer.Source =  this.retriveImage(images[counter]);
+
         }
 
         /*
@@ -164,9 +152,40 @@ namespace PhotoImpression
         public void PreviousPhoto()
         {
             counter--;
-            if (counter <= images.Length)
+            if (counter <= 0)
                 counter = images.Length-1;
             imageContainer.Source =  this.retriveImage(images[counter]);
+        }
+
+
+        /*
+         * Functions from the emgu.cv documents
+         * **/
+
+        //functions tobitmapsource from emug cv
+        [DllImport("gdi32")]
+        private static extern int DeleteObject(IntPtr o);
+
+        /// <summary>
+        /// Convert an IImage to a WPF BitmapSource. The result can be used in the Set Property of Image.Source
+        /// </summary>
+        /// <param name="image">The Emgu CV Image</param>
+        /// <returns>The equivalent BitmapSource</returns>
+        private static BitmapSource ToBitmapSource(IImage image)
+        {
+            using (System.Drawing.Bitmap source = image.Bitmap)
+            {
+                IntPtr ptr = source.GetHbitmap(); //obtain the Hbitmap
+
+                BitmapSource bs = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                    ptr,
+                    IntPtr.Zero,
+                    Int32Rect.Empty,
+                    System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
+
+                DeleteObject(ptr); //release the HBitmap
+                return bs;
+            }
         }
 
     }

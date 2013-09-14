@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Photo Impressor" Height="470" Width="645" Loaded="onLoad">
     <Grid x:Name="parentGrid" HorizontalAlignment="Center" MinHeight="420" VerticalAlignment="Center" MinWidth="645" Margin="0,0,0,0">
-        <Image x:Name="imageContainer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,50"/>
+        <Image x:Name="imageContainer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,50" MouseWheel="imageContainer_MouseWheel"/>
         <Grid HorizontalAlignment="Center" MinHeight="50" MinWidth="645" VerticalAlignment="Bottom">
             <Button x:Name="nextButton" Content="Next"  Height="31" Margin="120,0,0,10" VerticalAlignment="Bottom" Width="100" RenderTransformOrigin="0.4,1.258" Click="nextButton_Click"/>
             <Button x:Name="previous" Content="Previous"  Height="31" Margin="0,0,120,10" VerticalAlignment="Bottom" Width="100" Click="previousButton_Click"/>
