@@ -39,8 +39,6 @@ namespace PhotoImpression
             
             //display the first image
             imageContainer.Source = this.retriveImage(images[0]);
-            imageContainer.Width = 500;
-            imageContainer.Height = 500;
 
             counter = 0;
             degree = 0;
@@ -107,17 +105,15 @@ namespace PhotoImpression
         }
 
 
-        public void ZoomIn(double scale,System.Windows.Point pos) {
-
-            imageContainer.Width = imageContainer.Width * scale;
-            imageContainer.Height = imageContainer.Height * scale;
+        public void ZoomIn(double scale,ScaleTransform transform) {
+            transform.ScaleX *= scale;
+            transform.ScaleY *= scale;
         }
 
-        public void ZoomOut(double scale,System.Windows.Point pos) {
-            imageContainer.Width = imageContainer.Width / scale;
-            imageContainer.Height = imageContainer.Height / scale;
+        public void ZoomOut(double scale, ScaleTransform transform) {
+            transform.ScaleX /= scale;
+            transform.ScaleY /= scale;
         }
-
         /**
          rotate image to right
          */
