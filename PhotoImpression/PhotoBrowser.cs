@@ -22,24 +22,42 @@ namespace PhotoImpression
         private String[] images; //array of string store image path
         private int degree;     //controll the image rotate degree,
         private System.Windows.Controls.Image imageContainer;   //container for the images
+        private Config config;
 
         //constructor
         public PhotoBrowser(object sender, RoutedEventArgs e, System.Windows.Controls.Image container) {
-            var path = folderBrowser(sender, e);
-            
-            while (path == null)
-            {
-                path = folderBrowser(sender, e);
-            }
 
+            //declare teh config
+            config = new Config();
+
+            //read the path from config file
+            var path = config.ReadConfig("path");
+
+            //get all images from path
             images = GetImagesFrom(path, true);
-            while (images.Length <= 0)
-            {
-                System.Windows.MessageBox.Show("There is no photos in this directory!try again");
-                path = folderBrowser(sender, e);
-                images = GetImagesFrom(path, true);
-            }
 
+            //if it is null, let user define
+            if (path == null)
+            {
+                path = folderBrowser(sender, e);
+                //when path not defined
+                while (path == null)
+                {
+                    path = folderBrowser(sender, e);
+                }
+                //get all images from path
+                images = GetImagesFrom(path, true);
+                //if there is no image
+                while (images.Length <= 0)
+                {
+                    System.Windows.MessageBox.Show("There is no photos in this directory!try again");
+                    path = folderBrowser(sender, e);
+                    images = GetImagesFrom(path, true);
+                }
+                //write the path to config file
+                config.WriteConfig("path", path);
+            }
+            
             imageContainer = container;
 
             
