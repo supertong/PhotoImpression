@@ -84,9 +84,9 @@ namespace PhotoImpression
         /*
          * function to return image to image container by image path with name
          * **/
-        private BitmapSource retriveImage(string imgName)
+        public BitmapSource retriveImage(string imgName)
         {
-            Image<Bgr, Byte> image = new Image<Bgr, byte>(imgName);
+            Image<Bgr, Byte> image = new Image<Bgr, Byte>(imgName);
             
             return ToBitmapSource(image);
         }
@@ -104,6 +104,21 @@ namespace PhotoImpression
             this.NextPhoto();
         }
 
+        [DllImport("user32.dll", EntryPoint = "SystemParametersInfo")]
+        public static extern int SystemParametersInfo(
+             int uAction,
+             int uParam,
+             string lpvParam,
+             int fuWinIni
+         ); 
+
+        public void setBackGround() {
+            System.Drawing.Image img = System.Drawing.Image.FromFile(images[counter]);
+            var currentPath = System.Environment.CurrentDirectory;
+
+            img.Save(currentPath.ToString()+"\\image\\background.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            SystemParametersInfo(20, 0, currentPath.ToString() + "\\image\\background.bmp", 0x2);
+        }
 
         public void ZoomIn(double scale,ScaleTransform transform) {
             transform.ScaleX *= scale;

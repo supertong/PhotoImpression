@@ -15,17 +15,20 @@
         </Image>
 
         <Grid HorizontalAlignment="Center" MinHeight="50" MinWidth="645" VerticalAlignment="Bottom">
-            <Button x:Name="nextButton"  Background="Transparent" Height="30" Margin="50,0,0,10" VerticalAlignment="Bottom" Width="30" Click="nextButton_Click" BorderThickness="0">
-                <Image Width="30" Height="30" Source="E:\VisualStudio\PhotoImpression\PhotoImpression\bin\Debug\image\right.png"/>
+            <Button x:Name="nextButton"  Background="Transparent" Height="30" Margin="50,0,0,10" VerticalAlignment="Bottom" Width="30" Click="nextButton_Click" BorderThickness="0" ToolTip="Next Picture">
+                <Image x:Name="nextButtonIcon" Width="30" Height="30"/>
             </Button>
-            <Button x:Name="previous" Height="30" Background="Transparent" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="30" Click="previousButton_Click" BorderThickness="0">
-                <Image Width="30" Height="30" Source="E:\VisualStudio\PhotoImpression\PhotoImpression\bin\Debug\image\left.png"/>
+            <Button x:Name="background" Background="Transparent"  Height="30" Width="30" Margin="0,0,20,10" VerticalAlignment="Bottom" Click="backgroundButton_Click" BorderThickness="0" ToolTip="Set as wallpaper">
+                <Image x:Name="wallPaperButtonIcon"  Width="30" Height="30"/>
             </Button>
-            <Button x:Name="rightRotate" Height="30" Background="Transparent" Margin="230,0,0,10" VerticalAlignment="Bottom" Width="30" Click="rightRotate_Click" BorderThickness="0">
-                <Image Width="30" Height="30" Source="E:\VisualStudio\PhotoImpression\PhotoImpression\bin\Debug\image\rotate_right.gif"/>
+            <Button x:Name="previous" Height="30" Background="Transparent" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="30" Click="previousButton_Click" BorderThickness="0" ToolTip="Previous Picture">
+                <Image x:Name="previousButtonIcon" Width="30" Height="30"/>
             </Button>
-            <Button x:Name="leftRotate" Background="Transparent" Height="30" Margin="0,0,-140,10" VerticalAlignment="Bottom" Width="30" Click="leftRotate_Click" BorderThickness="0">
-                <Image Width="30" Height="30" Source="E:\VisualStudio\PhotoImpression\PhotoImpression\bin\Debug\image\rotate_left.gif"/>
+            <Button x:Name="rightRotate" Height="30" Background="Transparent" Margin="230,0,0,10" VerticalAlignment="Bottom" Width="30" Click="rightRotate_Click" BorderThickness="0" ToolTip="Rotate right">
+                <Image x:Name="rightRotateIcon" Width="30" Height="30"/>
+            </Button>
+            <Button x:Name="leftRotate" Background="Transparent" Height="30" Margin="0,0,-140,10" VerticalAlignment="Bottom" Width="30" Click="leftRotate_Click" BorderThickness="0" ToolTip="Rotate left">
+                <Image x:Name="leftRotateIcon"  Width="30" Height="30"/>
             </Button>
         </Grid>
     </Grid>
