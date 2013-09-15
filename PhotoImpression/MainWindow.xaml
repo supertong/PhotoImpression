@@ -15,10 +15,18 @@
         </Image>
 
         <Grid HorizontalAlignment="Center" MinHeight="50" MinWidth="645" VerticalAlignment="Bottom">
-            <Button x:Name="nextButton" Content="Next"  Height="31" Margin="120,0,0,10" VerticalAlignment="Bottom" Width="100" RenderTransformOrigin="0.4,1.258" Click="nextButton_Click"/>
-            <Button x:Name="previous" Content="Previous"  Height="31" Margin="0,0,120,10" VerticalAlignment="Bottom" Width="100" Click="previousButton_Click"/>
-            <Button x:Name="rightRotate" Content="Right Rotate"  Height="31" Margin="340,0,0,10" VerticalAlignment="Bottom" Width="100" Click="rightRotate_Click"/>
-            <Button x:Name="leftRotate" Content="Left Rotate"  Height="31" Margin="0,0,340,10" VerticalAlignment="Bottom" Width="100" Click="leftRotate_Click"/>
+            <Button x:Name="nextButton"  Background="Transparent" Height="30" Margin="50,0,0,10" VerticalAlignment="Bottom" Width="30" Click="nextButton_Click" BorderThickness="0">
+                <Image Width="30" Height="30" Source="E:\VisualStudio\PhotoImpression\PhotoImpression\bin\Debug\image\right.png"/>
+            </Button>
+            <Button x:Name="previous" Height="30" Background="Transparent" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="30" Click="previousButton_Click" BorderThickness="0">
+                <Image Width="30" Height="30" Source="E:\VisualStudio\PhotoImpression\PhotoImpression\bin\Debug\image\left.png"/>
+            </Button>
+            <Button x:Name="rightRotate" Height="30" Background="Transparent" Margin="230,0,0,10" VerticalAlignment="Bottom" Width="30" Click="rightRotate_Click" BorderThickness="0">
+                <Image Width="30" Height="30" Source="E:\VisualStudio\PhotoImpression\PhotoImpression\bin\Debug\image\rotate_right.gif"/>
+            </Button>
+            <Button x:Name="leftRotate" Background="Transparent" Height="30" Margin="0,0,-140,10" VerticalAlignment="Bottom" Width="30" Click="leftRotate_Click" BorderThickness="0">
+                <Image Width="30" Height="30" Source="E:\VisualStudio\PhotoImpression\PhotoImpression\bin\Debug\image\rotate_left.gif"/>
+            </Button>
         </Grid>
     </Grid>
 </Window>
