@@ -33,6 +33,12 @@ namespace PhotoImpression
             }
 
             images = GetImagesFrom(path, true);
+            while (images.Length <= 0)
+            {
+                System.Windows.MessageBox.Show("There is no photos in this directory!try again");
+                path = folderBrowser(sender, e);
+                images = GetImagesFrom(path, true);
+            }
 
             imageContainer = container;
 
