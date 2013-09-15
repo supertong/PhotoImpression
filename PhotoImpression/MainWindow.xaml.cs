@@ -38,12 +38,27 @@ namespace PhotoImpression
             String IconPath = System.Environment.CurrentDirectory.ToString()+"\\image\\";
 
             //dynamic load the icon from current working directory
-            nextButtonIcon.Source = new BitmapImage(new Uri(IconPath + "right.png"));
-            wallPaperButtonIcon.Source = new BitmapImage(new Uri(IconPath + "wallpaper.png"));
-            previousButtonIcon.Source = new BitmapImage(new Uri(IconPath + "left.png"));
-            rightRotateIcon.Source = new BitmapImage(new Uri(IconPath + "rotate_right.gif"));
-            leftRotateIcon.Source = new BitmapImage(new Uri(IconPath + "rotate_left.gif"));
+            try
+            {
+                nextButtonIcon.Source = new BitmapImage(new Uri(IconPath + "right.png"));
+                wallPaperButtonIcon.Source = new BitmapImage(new Uri(IconPath + "wallpaper.png"));
+                previousButtonIcon.Source = new BitmapImage(new Uri(IconPath + "left.png"));
+                rightRotateIcon.Source = new BitmapImage(new Uri(IconPath + "rotate_right.gif"));
+                leftRotateIcon.Source = new BitmapImage(new Uri(IconPath + "rotate_left.gif"));
+                autoRunIcon.Source = new BitmapImage(new Uri(IconPath + "auto.png"));
+            }
+            catch (Exception)
+            {
+                System.Windows.MessageBox.Show("Fail loading button icons, please check path "+IconPath);
+                System.Environment.Exit(1);
+            }
             //browser.autoRunImage();
+        }
+
+        private void autoRun_Click(object sender, RoutedEventArgs e) 
+        {
+
+            browser.autoRunImage();
         }
 
         private void nextButton_Click(object sender, RoutedEventArgs e)
@@ -66,7 +81,7 @@ namespace PhotoImpression
             browser.LeftRotate();
         }
 
- 
+
         private void backgroundButton_Click(object sender, RoutedEventArgs e) {
             browser.setBackGround();
         }
@@ -76,17 +91,25 @@ namespace PhotoImpression
             //change cursor
             imageContainer.Cursor = Cursors.Hand;
 
-            //get the transformer form the image transform group
+            try
+            {
+                //get the transformer form the image transform group
 
-            ScaleTransform transform = imageTransformGroup.Children[0] as ScaleTransform;
-            if (e.Delta > 0)
-            {
-                browser.ZoomIn(1.3, transform);
-            }else
-            {
-                browser.ZoomOut(1.3, transform);
+                ScaleTransform transform = imageTransformGroup.Children[0] as ScaleTransform;
+                if (e.Delta > 0)
+                {
+                    browser.ZoomIn(1.3, transform);
+                }
+                else
+                {
+                    browser.ZoomOut(1.3, transform);
+                }
             }
-            
+            catch (Exception) {
+                System.Windows.MessageBox.Show("Fail to get the scale transformer");
+                System.Environment.Exit(1);
+            }
+
         }
 
         private void imageContainer_MouseMove(object sender, MouseEventArgs e)
@@ -96,7 +119,6 @@ namespace PhotoImpression
                 return;
             if (leftButtonDown)
                 MoveImage(image, e);
-
         }
 
         private void MoveImage(Image image, MouseEventArgs e)
