@@ -57,7 +57,6 @@ namespace PhotoImpression
 
         private void autoRun_Click(object sender, RoutedEventArgs e) 
         {
-
             browser.autoRunImage();
         }
 
