@@ -14,6 +14,7 @@ using Emgu.CV.Structure;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
+
 namespace PhotoImpression
 {
     class PhotoBrowser
