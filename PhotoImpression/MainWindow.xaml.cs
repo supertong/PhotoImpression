@@ -9,7 +9,9 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -34,8 +36,9 @@ namespace PhotoImpression
 
         private void onLoad(object sender, RoutedEventArgs e)
         {
+
             browser = new PhotoBrowser(sender, e, imageContainer);
-            String IconPath = System.Environment.CurrentDirectory.ToString()+"\\image\\";
+            String IconPath = System.Environment.CurrentDirectory.ToString() + "\\image\\";
 
             //dynamic load the icon from current working directory
             try
@@ -46,19 +49,31 @@ namespace PhotoImpression
                 rightRotateIcon.Source = new BitmapImage(new Uri(IconPath + "rotate_right.gif"));
                 leftRotateIcon.Source = new BitmapImage(new Uri(IconPath + "rotate_left.gif"));
                 autoRunIcon.Source = new BitmapImage(new Uri(IconPath + "auto.png"));
+                browserIcon.Source = new BitmapImage(new Uri(IconPath + "folder_browser.png"));
+                exitIcon.Source = new BitmapImage(new Uri(IconPath + "exit.png"));
             }
             catch (Exception)
             {
-                System.Windows.MessageBox.Show("Fail loading button icons, please check path "+IconPath);
+                System.Windows.MessageBox.Show("Fail loading button icons, please check path " + IconPath);
                 System.Environment.Exit(1);
             }
             //browser.autoRunImage();
         }
 
-        private void autoRun_Click(object sender, RoutedEventArgs e) 
+        private void autoRun_Click(object sender, RoutedEventArgs e)
         {
+            //set windows location to right corner
+            double width = System.Windows.SystemParameters.WorkArea.Width;
+            double height = System.Windows.SystemParameters.WorkArea.Height;
+
+            this.Width = width;
+            this.Height = height;
+            this.Top = 0;
+            this.Left = 0;
+
             browser.autoRunImage();
         }
+
 
         private void nextButton_Click(object sender, RoutedEventArgs e)
         {
@@ -81,20 +96,18 @@ namespace PhotoImpression
         }
 
 
-        private void backgroundButton_Click(object sender, RoutedEventArgs e) {
+        private void backgroundButton_Click(object sender, RoutedEventArgs e)
+        {
             browser.setBackGround();
         }
 
         private void imageContainer_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            //change cursor
-            imageContainer.Cursor = Cursors.Hand;
-
             try
             {
                 //get the transformer form the image transform group
-
                 ScaleTransform transform = imageTransformGroup.Children[0] as ScaleTransform;
+
                 if (e.Delta > 0)
                 {
                     browser.ZoomIn(1.3, transform);
@@ -103,8 +116,15 @@ namespace PhotoImpression
                 {
                     browser.ZoomOut(1.3, transform);
                 }
+                //change the cursor according zoom in and out
+                if (transform.ScaleX >= 1.3)
+                    imageContainer.Cursor = Cursors.Hand;
+                else
+                    imageContainer.Cursor = Cursors.Arrow;
+
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 System.Windows.MessageBox.Show("Fail to get the scale transformer");
                 System.Environment.Exit(1);
             }
@@ -116,7 +136,12 @@ namespace PhotoImpression
             Image image = sender as Image;
             if (image == null)
                 return;
-            if (leftButtonDown)
+
+            //get the transformer form the image transform group
+            ScaleTransform transform = imageTransformGroup.Children[0] as ScaleTransform;
+
+            //only leftbutton is down and zoom in can move picture
+            if (leftButtonDown && transform.ScaleX >= 1.3)
                 MoveImage(image, e);
         }
 
@@ -124,10 +149,11 @@ namespace PhotoImpression
         {
             if (e.LeftButton != MouseButtonState.Pressed)
                 return;
-            
+
             TranslateTransform transform = imageTransformGroup.Children[3] as TranslateTransform;
             Point position = e.GetPosition(image);
-        
+
+
             transform.X += (position.X - MousePreLocation.X);
             transform.Y += (position.Y - MousePreLocation.Y);
         }
@@ -153,5 +179,14 @@ namespace PhotoImpression
             leftButtonDown = false;
         }
 
-   }
+        private void mainMenu_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.mainMenu.Width = Application.Current.MainWindow.Width;
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            this.mainMenu.Width = Application.Current.MainWindow.Width;
+        }
+    }
 }

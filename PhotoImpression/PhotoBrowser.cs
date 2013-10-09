@@ -13,7 +13,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Drawing;
 using System.Runtime.InteropServices;
-
+using System.Windows.Media.Animation;
 
 namespace PhotoImpression
 {
@@ -34,8 +34,6 @@ namespace PhotoImpression
             //read the path from config file
             var path = config.ReadConfig("path");
 
-            //get all images from path
-            images = GetImagesFrom(path, true);
 
             //if it is null, let user define
             if (path == null)
@@ -58,7 +56,10 @@ namespace PhotoImpression
                 //write the path to config file
                 config.WriteConfig("path", path);
             }
-            
+
+            //get all images from path
+            images = GetImagesFrom(path, true);
+
             imageContainer = container;
 
             
@@ -116,18 +117,176 @@ namespace PhotoImpression
             return ToBitmapSource(image);
         }
 
-        public void autoRunImage()
-        {
-            Timer timer = new Timer();
-            timer.Tick += new EventHandler(time_tick);
-            timer.Interval = 3000;
-            timer.Start();
+        /*
+        private void FadeIn() {
+
+            this.NextPhoto();
+            DoubleAnimation opacityAnimation = new DoubleAnimation(0,1, new Duration(TimeSpan.FromSeconds(3)));
+            Storyboard.SetTarget(opacityAnimation, imageContainer);
+            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath("(UIElement.Opacity)"));
+            Storyboard board = new Storyboard();
+            board.Children.Add(opacityAnimation);
+            board.Completed += (obj, args) =>
+            {
+                flipYOut();
+            };
+            board.Begin();
+            
         }
 
-        private void time_tick(object sender, EventArgs e)
+        private void FadeOut()
+        {
+            DoubleAnimation opacityAnimation = new DoubleAnimation(1,0, new Duration(TimeSpan.FromSeconds(3)));
+            Storyboard.SetTarget(opacityAnimation, imageContainer);
+            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath("(UIElement.Opacity)"));
+            Storyboard board = new Storyboard();
+            board.Children.Add(opacityAnimation);
+            board.Completed += (obj, args) =>
+            {
+                FadeIn();
+            };
+            board.Begin();
+        }
+
+        private void flipXIn() {
+            this.NextPhoto();
+            DoubleAnimation flipfront = new DoubleAnimation(90, 0, new Duration(TimeSpan.FromSeconds(2)));
+
+            DependencyProperty[] PropertyChain = new DependencyProperty[]
+            {
+                UIElement.RenderTransformProperty,//0
+                TransformGroup.ChildrenProperty, //1
+                ScaleTransform.ScaleXProperty, //2
+                ScaleTransform.ScaleYProperty, //3
+                RotateTransform.AngleProperty, //4
+                SkewTransform.AngleXProperty, //5
+                SkewTransform.AngleYProperty, //6
+                TranslateTransform.XProperty, //7
+                TranslateTransform.YProperty //8
+            };
+
+
+            Storyboard.SetTarget(flipfront, imageContainer);
+            Storyboard.SetTargetProperty(flipfront, new PropertyPath("(0).(1)[1].(5)", PropertyChain));
+
+            Storyboard board = new Storyboard();
+            board.Children.Add(flipfront);
+
+            board.Completed += (obj, args) =>
+            {
+                FadeOut();
+            };
+
+            board.Begin();
+        }
+
+        private void flipXOut() {
+            DoubleAnimation flipfront = new DoubleAnimation(0, 90, new Duration(TimeSpan.FromSeconds(2)));
+
+            DependencyProperty[] PropertyChain = new DependencyProperty[]
+            {
+                UIElement.RenderTransformProperty,//0
+                TransformGroup.ChildrenProperty, //1
+                ScaleTransform.ScaleXProperty, //2
+                ScaleTransform.ScaleYProperty, //3
+                RotateTransform.AngleProperty, //4
+                SkewTransform.AngleXProperty, //5
+                SkewTransform.AngleYProperty, //6
+                TranslateTransform.XProperty, //7
+                TranslateTransform.YProperty //8
+            };
+
+
+            Storyboard.SetTarget(flipfront, imageContainer);
+            Storyboard.SetTargetProperty(flipfront, new PropertyPath("(0).(1)[1].(5)", PropertyChain));
+
+            Storyboard board = new Storyboard();
+            board.Children.Add(flipfront);
+            
+            board.Completed += (obj, args) =>
+            {
+                flipXIn();
+            };
+
+            board.Begin();
+        }
+
+        private void flipYIn()
         {
             this.NextPhoto();
+            DoubleAnimation flipfront = new DoubleAnimation(90, 0, new Duration(TimeSpan.FromSeconds(2)));
+
+            DependencyProperty[] PropertyChain = new DependencyProperty[]
+            {
+                UIElement.RenderTransformProperty,//0
+                TransformGroup.ChildrenProperty, //1
+                ScaleTransform.ScaleXProperty, //2
+                ScaleTransform.ScaleYProperty, //3
+                RotateTransform.AngleProperty, //4
+                SkewTransform.AngleXProperty, //5
+                SkewTransform.AngleYProperty, //6
+                TranslateTransform.XProperty, //7
+                TranslateTransform.YProperty //8
+            };
+
+
+            Storyboard.SetTarget(flipfront, imageContainer);
+            Storyboard.SetTargetProperty(flipfront, new PropertyPath("(0).(1)[1].(6)", PropertyChain));
+
+            Storyboard board = new Storyboard();
+            board.Children.Add(flipfront);
+
+            board.Completed += (obj, args) =>
+            {
+                flipXOut();
+            };
+
+            board.Begin();
         }
+
+        private void flipYOut()
+        {
+            DoubleAnimation flipfront = new DoubleAnimation(0, 90, new Duration(TimeSpan.FromSeconds(2)));
+
+            DependencyProperty[] PropertyChain = new DependencyProperty[]
+            {
+                UIElement.RenderTransformProperty,//0
+                TransformGroup.ChildrenProperty, //1
+                ScaleTransform.ScaleXProperty, //2
+                ScaleTransform.ScaleYProperty, //3
+                RotateTransform.AngleProperty, //4
+                SkewTransform.AngleXProperty, //5
+                SkewTransform.AngleYProperty, //6
+                TranslateTransform.XProperty, //7
+                TranslateTransform.YProperty //8
+            };
+
+
+            Storyboard.SetTarget(flipfront, imageContainer);
+            Storyboard.SetTargetProperty(flipfront, new PropertyPath("(0).(1)[1].(6)", PropertyChain));
+
+            Storyboard board = new Storyboard();
+            board.Children.Add(flipfront);
+
+            board.Completed += (obj, args) =>
+            {
+                flipYIn();
+            };
+
+            board.Begin();
+        }
+         * 
+         * */
+
+        public void autoRunImage()
+        {
+            //flipXOut();
+        }
+
+        //private void time_tick(object sender, EventArgs e)
+        //{
+        //    this.NextPhoto();
+        //}
 
         [DllImport("user32.dll", EntryPoint = "SystemParametersInfo")]
         public static extern int SystemParametersInfo(
@@ -171,6 +330,8 @@ namespace PhotoImpression
             imageContainer.LayoutTransform = new RotateTransform(degree);
         }
 
+     
+
         /*
          * Return the next photo
          * **/
@@ -179,7 +340,6 @@ namespace PhotoImpression
             if (counter >= images.Length)
                 counter = 0;
             imageContainer.Source =  this.retriveImage(images[counter]);
-
         }
 
         /*
