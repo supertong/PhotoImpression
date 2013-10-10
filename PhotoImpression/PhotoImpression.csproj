@@ -106,6 +106,23 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icons\auto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\exit.png" />
+    <Resource Include="Icons\folder_browser.png" />
+    <Resource Include="Icons\left.png" />
+    <Resource Include="Icons\right.png" />
+    <Resource Include="Icons\zoom_in.png" />
+    <Resource Include="Icons\zoom_out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\rotate_left.gif" />
+    <Resource Include="Icons\rotate_right.gif" />
+    <Resource Include="Icons\wallpaper.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

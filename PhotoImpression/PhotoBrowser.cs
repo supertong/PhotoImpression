@@ -300,8 +300,8 @@ namespace PhotoImpression
             System.Drawing.Image img = System.Drawing.Image.FromFile(images[counter]);
             var currentPath = System.Environment.CurrentDirectory;
 
-            img.Save(currentPath.ToString()+"\\image\\background.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
-            SystemParametersInfo(20, 0, currentPath.ToString() + "\\image\\background.bmp", 0x2);
+            img.Save(currentPath.ToString()+"\\background.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            SystemParametersInfo(20, 0, currentPath.ToString() + "\\background.bmp", 0x2);
         }
 
         public void ZoomIn(double scale,ScaleTransform transform) {

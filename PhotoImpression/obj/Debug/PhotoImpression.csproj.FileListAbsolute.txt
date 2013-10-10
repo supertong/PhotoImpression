@@ -11,8 +11,3 @@ E:\VisualStudio\PhotoImpression\PhotoImpression\obj\Debug\PhotoImpression.Proper
 E:\VisualStudio\PhotoImpression\PhotoImpression\obj\Debug\PhotoImpression.csproj.GenerateResource.Cache
 E:\VisualStudio\PhotoImpression\PhotoImpression\obj\Debug\PhotoImpression.exe
 E:\VisualStudio\PhotoImpression\PhotoImpression\obj\Debug\PhotoImpression.pdb
-E:\VisualStudio\PhotoImpression\PhotoImpression\obj\Debug\PhotoImpression.csprojResolveAssemblyReference.cache
-E:\VisualStudio\PhotoImpression\PhotoImpression\bin\Debug\ZedGraph.dll
-E:\VisualStudio\PhotoImpression\PhotoImpression\bin\Debug\Emgu.CV.xml
-E:\VisualStudio\PhotoImpression\PhotoImpression\bin\Debug\Emgu.CV.UI.xml
-E:\VisualStudio\PhotoImpression\PhotoImpression\bin\Debug\Emgu.Util.xml

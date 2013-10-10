@@ -38,7 +38,7 @@ namespace PhotoImpression
         {
 
             browser = new PhotoBrowser(sender, e, imageContainer);
-            String IconPath = System.Environment.CurrentDirectory.ToString() + "\\image\\";
+            String IconPath = "pack://application:,,,/Icons/";
 
             //dynamic load the icon from current working directory
             try
