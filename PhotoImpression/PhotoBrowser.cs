@@ -299,9 +299,12 @@ namespace PhotoImpression
         public void setBackGround() {
             System.Drawing.Image img = System.Drawing.Image.FromFile(images[counter]);
             var currentPath = System.Environment.CurrentDirectory;
+            
+            //create directory for wallpaper
+            System.IO.Directory.CreateDirectory(currentPath + "\\backgroundImage\\");
 
-            img.Save(currentPath.ToString()+"\\background.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
-            SystemParametersInfo(20, 0, currentPath.ToString() + "\\background.bmp", 0x2);
+            img.Save(currentPath.ToString()+"\\backgroundImage\\background.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            SystemParametersInfo(20, 0, currentPath.ToString() + "\\backgroundImage\\background.bmp", 0x2);
         }
 
         public void ZoomIn(double scale,ScaleTransform transform) {

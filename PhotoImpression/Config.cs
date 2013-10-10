@@ -11,6 +11,8 @@ namespace PhotoImpression
         private string config_path;
 
         public Config() {
+            System.IO.Directory.CreateDirectory(System.Environment.CurrentDirectory.ToString() + "\\Config\\");
+
             this.config_path = System.Environment.CurrentDirectory.ToString()+"\\Config\\Config.ini";
         }
 

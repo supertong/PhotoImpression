@@ -11,3 +11,4 @@ E:\VisualStudio\PhotoImpression\PhotoImpression\obj\Debug\PhotoImpression.Proper
 E:\VisualStudio\PhotoImpression\PhotoImpression\obj\Debug\PhotoImpression.csproj.GenerateResource.Cache
 E:\VisualStudio\PhotoImpression\PhotoImpression\obj\Debug\PhotoImpression.exe
 E:\VisualStudio\PhotoImpression\PhotoImpression\obj\Debug\PhotoImpression.pdb
+E:\VisualStudio\PhotoImpression\PhotoImpression\obj\Debug\PhotoImpression.csprojResolveAssemblyReference.cache
