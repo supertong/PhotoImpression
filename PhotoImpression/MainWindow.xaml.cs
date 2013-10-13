@@ -37,6 +37,9 @@ namespace PhotoImpression
         private void onLoad(object sender, RoutedEventArgs e)
         {
 
+            var flickrWindow = new FlickrWindow();
+            flickrWindow.Show();
+
             browser = new PhotoBrowser(sender, e, imageContainer);
             String IconPath = "pack://application:,,,/Icons/";
 
