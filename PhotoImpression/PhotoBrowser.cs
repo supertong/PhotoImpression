@@ -332,7 +332,14 @@ namespace PhotoImpression
             imageContainer.LayoutTransform = new RotateTransform(degree);
         }
 
-     
+        /**
+         *add function to get current displayed photo
+         */
+        public Image<Bgr, Byte> currentPhoto()
+        {
+            Image<Bgr, Byte> image = new Image<Bgr, Byte>(images[counter]);
+            return image;
+        }
 
         /*
          * Return the next photo
@@ -350,7 +357,7 @@ namespace PhotoImpression
         public void PreviousPhoto()
         {
             counter--;
-            if (counter <= 0)
+            if (counter < 0)
                 counter = images.Length-1;
             imageContainer.Source =  this.retriveImage(images[counter]);
         }
