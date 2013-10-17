@@ -33,9 +33,13 @@ namespace PhotoImpression.ViewComponents
             Flickr flickr = new Flickr(apiKey);
             PhotoSearchOptions searchOptions = new PhotoSearchOptions();
             searchOptions.Tags = "microsoft";
+            searchOptions.PerPage = 10;
             PhotoCollection microsoftPhotos = flickr.PhotosSearch(searchOptions);
 
-
+            foreach(Photo p in microsoftPhotos)
+            {
+                Console.WriteLine(p);
+            }
             ImageGallery.DataContext = microsoftPhotos;
         }
     }
