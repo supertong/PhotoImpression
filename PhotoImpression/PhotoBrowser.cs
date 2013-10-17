@@ -34,7 +34,6 @@ namespace PhotoImpression
             //read the path from config file
             var path = config.ReadConfig("path");
 
-
             //if it is null, let user define
             if (path == null)
             {
