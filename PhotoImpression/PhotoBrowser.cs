@@ -315,6 +315,11 @@ namespace PhotoImpression
             transform.ScaleX /= scale;
             transform.ScaleY /= scale;
         }
+
+        public void clearTransform() {
+            imageContainer.LayoutTransform = new RotateTransform(0);
+        }
+
         /**
          rotate image to right
          */
