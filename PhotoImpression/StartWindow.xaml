@@ -5,10 +5,10 @@
         Title="Photo Impression" Height="Auto" Width="Auto" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
+
         <controll:LeftMenuPanel Grid.Column="0" />
         <ContentPresenter x:Name="rightPanel" Grid.Column="1" />
     </Grid>
