@@ -31,9 +31,11 @@ namespace PhotoImpression.ViewComponents
         {
             InitializeComponent();
         }
+
         private void onLoad(object sender, RoutedEventArgs e)
         {
 
+            
             browser = new PhotoBrowser(sender, e, imageContainer);
             String IconPath = "pack://application:,,,/Icons/";
 
@@ -67,14 +69,30 @@ namespace PhotoImpression.ViewComponents
             browser.autoRunImage();
         }
 
+        //function clean the transform effect 
+        private void clearTransform() {
+            browser.clearTransform();
+            TranslateTransform transform = imageTransformGroup.Children[3] as TranslateTransform;
+            transform.X = 0;
+            transform.Y = 0;
+
+            ScaleTransform transformScale = imageTransformGroup.Children[0] as ScaleTransform;
+
+            transformScale.ScaleX = 1;
+            transformScale.ScaleY = 1;
+
+            browser.ZoomIn(1, transformScale);
+        }
 
         private void nextButton_Click(object sender, RoutedEventArgs e)
         {
+            this.clearTransform();
             browser.NextPhoto();
         }
 
         private void previousButton_Click(object sender, RoutedEventArgs e)
         {
+            this.clearTransform();
             browser.PreviousPhoto();
         }
 
