@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             Loaded="UserControl_Loaded">
+             mc:Ignorable="d" Initialized="UserControl_Initialized">
     <UserControl.Resources>
         <ItemsPanelTemplate x:Key="ImageGalleryItemsPanelTemplate">
             <UniformGrid Columns="3" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"></UniformGrid>
@@ -32,9 +31,27 @@
 
     </UserControl.Resources>
 
-    <Grid Width="Auto">
-        <ListBox x:Name="ImageGallery" ItemsSource="{Binding}" ItemsPanel="{DynamicResource ImageGalleryItemsPanelTemplate}" ItemTemplate="{StaticResource ListImageDataTemplate}" BorderThickness="0">
-           
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBox HorizontalAlignment="Left"
+		             Height="23"
+		             Margin="10,10,0,0"
+		             TextWrapping="Wrap"
+		             Text=""
+		             VerticalAlignment="Top"
+		             Width="120" 
+                     x:Name="keyword"/>
+            <Button HorizontalAlignment="Left"
+                    Width="120"
+                    Margin="10,5,0,0" Click="Button_Click"
+                    >Search</Button>
+        </StackPanel>
+        <ListBox Grid.Row="1" x:Name="ImageGallery" ItemsSource="{Binding}" ItemsPanel="{DynamicResource ImageGalleryItemsPanelTemplate}" ItemTemplate="{StaticResource ListImageDataTemplate}" BorderThickness="0">
+
         </ListBox>
     </Grid>
 </UserControl>

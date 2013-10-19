@@ -21,6 +21,7 @@ namespace PhotoImpression.ViewComponents
     /// </summary>
     public partial class FlickrSearch : UserControl
     {
+        private Flickr flickr;
         private string apiKey = "5ed32d353e466d9cf09131c46fd95eb5";
 
         public FlickrSearch()
@@ -28,27 +29,37 @@ namespace PhotoImpression.ViewComponents
             InitializeComponent();
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void Flickr_Search(string keyword)
         {
-            Flickr flickr = new Flickr(apiKey);
+            ImageGallery.DataContext = null;
             PhotoSearchOptions searchOptions = new PhotoSearchOptions();
-            searchOptions.Tags = "microsoft";
+            searchOptions.Tags = keyword;
             searchOptions.PerPage = 12;
             Console.WriteLine("Ready to search");
-            flickr.PhotosSearchAsync(searchOptions, (callback) =>
+            this.flickr.PhotosSearchAsync(searchOptions, (callback) =>
+            {
+                if (callback.HasError == true)
                 {
-                    if (callback.HasError == true)
-                    {
-                        MessageBox.Show(callback.ErrorMessage);
-                    }
-                    else
-                    {
-                        ImageGallery.DataContext = callback.Result;
-                    }
-                });
+                    MessageBox.Show(callback.ErrorMessage);
+                }
+                else
+                {
+                    ImageGallery.DataContext = callback.Result;
+                }
+            });
             Console.WriteLine("Finished searching....");
+        }
 
-           // ImageGallery.DataContext = microsoftPhotos;
+        private void UserControl_Initialized(object sender, EventArgs e)
+        {
+            this.flickr = new Flickr(apiKey);
+            this.Flickr_Search("dog");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Searching for keyword: " + this.keyword.Text);
+            this.Flickr_Search(this.keyword.Text);
         }
     }
 }

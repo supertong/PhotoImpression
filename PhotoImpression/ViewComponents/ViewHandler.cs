@@ -29,7 +29,10 @@ namespace PhotoImpression.ViewComponents
             get
             {
                 if (_gallery == null)
+                {
+                    Console.WriteLine("Creating new gallery");
                     _gallery = new Gallery();
+                }
                 return _gallery;
             }
         }
@@ -39,7 +42,10 @@ namespace PhotoImpression.ViewComponents
             get
             {
                 if (_flickrSearch == null)
+                {
+                    Console.WriteLine("Creating new flickr search");
                     _flickrSearch = new FlickrSearch();
+                }
                 return _flickrSearch;
             }
         }
