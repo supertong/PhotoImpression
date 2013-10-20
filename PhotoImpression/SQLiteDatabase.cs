@@ -78,7 +78,7 @@ namespace PhotoImpression
             string hashedValue = this.GetSHA1HashData(binaryData);
             if (this.CheckImageHash(hashedValue))
             {
-                MessageBox.Show("Image already exists in database");
+                MessageBox.Show("Image " + title + " already exists in database");
                 return;
             }
             connecction.Open();
