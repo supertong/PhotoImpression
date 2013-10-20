@@ -23,11 +23,22 @@ namespace PhotoImpression
         private static PhotoBrowser browser;
         private static int index = 1;
         private SQLiteDatabase database;
+        public static PhotoPresent me;
 
+        
         public PhotoPresent()
         {
             InitializeComponent();
+            me = this;
             database = new SQLiteDatabase();
+        }
+
+        public static PhotoPresent Singleton
+        {
+            get
+            {
+                return me;
+            }
         }
 
         public static int getIndex() {
@@ -57,8 +68,7 @@ namespace PhotoImpression
 
         private void imageContainer_Loaded(object sender, RoutedEventArgs e)
         {
-            imageContainer.DataContext = database.getRandomImageFromDatabase();
-
+            imageContainer.Source = database.getRandomImageFromDatabase();
         }
 
     }

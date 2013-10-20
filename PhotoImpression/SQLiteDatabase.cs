@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace PhotoImpression
 {
@@ -106,7 +107,7 @@ namespace PhotoImpression
             Console.WriteLine("Saved");
         }
 
-        public Image getRandomImageFromDatabase()
+        public BitmapImage getRandomImageFromDatabase()
         {
             string sql = "SELECT * FROM photo ORDER BY RANDOM() LIMIT 1";
             connecction.Open();
@@ -121,7 +122,19 @@ namespace PhotoImpression
             ImageConverter ic = new ImageConverter();
             Image img = (Image)ic.ConvertFrom(byteArray);
             connecction.Close();
-            return img;
+            Bitmap bitmap = new Bitmap(img);
+
+            using (MemoryStream memory = new MemoryStream())
+            {
+                bitmap.Save(memory, ImageFormat.Jpeg);
+                memory.Position = 0;
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                return bitmapImage;
+            }
         }
     }
 }
