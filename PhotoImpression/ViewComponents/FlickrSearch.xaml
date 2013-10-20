@@ -12,6 +12,11 @@
 
         <DataTemplate x:Key="ListImageDataTemplate">
             <Grid HorizontalAlignment="Center" Width="Auto" Height="Auto">
+                <Grid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Save" Click="MenuItem_Click"></MenuItem>
+                    </ContextMenu>
+                </Grid.ContextMenu>
                 <Border Padding="5" Margin="10" BorderBrush="Orange">
                     <!--Bind Image Path in Image Control-->
                     <Image Source="{Binding SquareThumbnailUrl, IsAsync=True}"  HorizontalAlignment="Center" >
@@ -53,7 +58,7 @@
                     >Search</Button>
         </StackPanel>
 
-        <ListBox Grid.Row="1" x:Name="ImageGallery" ItemsSource="{Binding}" ItemsPanel="{DynamicResource ImageGalleryItemsPanelTemplate}" ItemTemplate="{StaticResource ListImageDataTemplate}" BorderThickness="0">
+        <ListBox Grid.Row="1" x:Name="ImageGallery" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" ItemsPanel="{DynamicResource ImageGalleryItemsPanelTemplate}" ItemTemplate="{StaticResource ListImageDataTemplate}" BorderThickness="0">
 
         </ListBox>
         <Controls:ProgressRing IsActive="True" Margin="155,35,-85,-36" RenderTransformOrigin="0.883,0.583" Grid.RowSpan="2" />
