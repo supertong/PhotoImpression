@@ -10,29 +10,32 @@
             xmlns:refl="clr-namespace:System.Reflection;assembly=mscorlib"
              mc:Ignorable="d" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="430" Margin="30,0,0,0" Height="Auto" Width="Auto" Loaded="UserControl_Loaded" > 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition MinHeight="430"/>
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <transc:TransitionElement x:Name="TransitionBox" Grid.Column="0">
+                    <transc:TransitionElement.TransitionSelector>
+                        <trans:RandomTransitionSelector>
+                            <transt:CheckerboardTransition Duration="Automatic"/>
+                            <transt:DiamondsTransition Duration="Automatic"/>
+                            <transt:DotsTransition  Duration="Automatic" />
+                            <transt:ExplosionTransition Duration="00:00:01" FieldOfView="20"/>
+                            <transt:FadeAndGrowTransition Duration="Automatic"/>
+                            <transt:HorizontalBlindsTransition Duration="Automatic"/>
+                            <transt:VerticalBlindsTransition Duration="Automatic"/>
+                            <transt:TranslateTransition StartPoint="-1,0" EndPoint="0,0" Duration="Automatic"/>
+                        </trans:RandomTransitionSelector>
+                    </transc:TransitionElement.TransitionSelector>
+                </transc:TransitionElement>
+        </Grid>
         <controll:PhotoMenu Grid.Row="1"/>
-        
-        <transc:TransitionElement x:Name="TransitionBox" Grid.Row="0">
-            <transc:TransitionElement.TransitionSelector>
-                <trans:RandomTransitionSelector>
-                    <transt:CheckerboardTransition Duration="Automatic"/>
-                    <transt:DiamondsTransition Duration="Automatic"/>
-                    <transt:DotsTransition  Duration="Automatic" />
-                    <transt:ExplosionTransition Duration="00:00:01" FieldOfView="20"/>
-                    <transt:FadeAndGrowTransition Duration="Automatic"/>
-                    <transt:HorizontalBlindsTransition Duration="Automatic"/>
-                    <transt:VerticalBlindsTransition Duration="Automatic"/>
-                    <transt:TranslateTransition StartPoint="-1,0" EndPoint="0,0" Duration="Automatic"/>
-                </trans:RandomTransitionSelector>
-            </transc:TransitionElement.TransitionSelector>
-            </transc:TransitionElement>
-    
-  
+        <controll:ToolBoxMenu Grid.Column="1"/>
     </Grid>
     
 </UserControl>

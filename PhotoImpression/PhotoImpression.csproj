@@ -47,10 +47,10 @@
     <Reference Include="FlickrNet">
       <HintPath>$(ProgramFiles)\FlickrNet.dll</HintPath>
     </Reference>
-	<Reference Include="System.Data.SQLite">
+    <Reference Include="System.Data.SQLite">
       <HintPath>$(ProgramFiles)\System.Data.SQLite.dll</HintPath>
     </Reference>
-	<Reference Include="System.Data.SQLite.Linq">
+    <Reference Include="System.Data.SQLite.Linq">
       <HintPath>$(ProgramFiles)\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro">
@@ -90,8 +90,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-
-	<Compile Include="SQLiteDatabase.cs" />    <Compile Include="ViewComponents\PhotoPresent.xaml.cs">
+    <Compile Include="SQLiteDatabase.cs" />
+    <Compile Include="ViewComponents\PhotoPresent.xaml.cs">
       <DependentUpon>PhotoPresent.xaml</DependentUpon>
     </Compile>
     <Compile Include="StartWindow.xaml.cs">
@@ -108,6 +108,9 @@
     </Compile>
     <Compile Include="ViewComponents\PhotoMenu.xaml.cs">
       <DependentUpon>PhotoMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewComponents\ToolBoxMenu.xaml.cs">
+      <DependentUpon>ToolBoxMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewComponents\ViewHandler.cs" />
     <Compile Include="App.xaml.cs">
@@ -136,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewComponents\PhotoMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewComponents\ToolBoxMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
