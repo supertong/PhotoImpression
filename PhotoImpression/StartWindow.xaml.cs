@@ -27,6 +27,8 @@ namespace PhotoImpression
         {
             InitializeComponent();
             me = this;
+
+            SQLiteDatabase database = new SQLiteDatabase();
         }
 
         public static StartWindow Singleton

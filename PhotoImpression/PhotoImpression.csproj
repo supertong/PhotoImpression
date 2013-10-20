@@ -47,6 +47,12 @@
     <Reference Include="FlickrNet">
       <HintPath>$(ProgramFiles)\FlickrNet.dll</HintPath>
     </Reference>
+	<Reference Include="System.Data.SQLite">
+      <HintPath>$(ProgramFiles)\System.Data.SQLite.dll</HintPath>
+    </Reference>
+	<Reference Include="System.Data.SQLite.Linq">
+      <HintPath>$(ProgramFiles)\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.0.10.1.1\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -84,7 +90,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewComponents\PhotoPresent.xaml.cs">
+
+	<Compile Include="SQLiteDatabase.cs" />    <Compile Include="ViewComponents\PhotoPresent.xaml.cs">
       <DependentUpon>PhotoPresent.xaml</DependentUpon>
     </Compile>
     <Compile Include="StartWindow.xaml.cs">
@@ -183,7 +190,10 @@
     <Content Include="opencv_core242.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Transitionals.dll" />
+
+	<Content Include="Transitionals.dll" />    <Content Include="SQLite.Designer.dll" />
+    <Content Include="System.Data.SQLite.dll" />
+    <Content Include="System.Data.SQLite.Linq.dll" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\auto.png" />
@@ -200,6 +210,9 @@
     <Resource Include="Icons\rotate_left.gif" />
     <Resource Include="Icons\rotate_right.gif" />
     <Resource Include="Icons\wallpaper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
