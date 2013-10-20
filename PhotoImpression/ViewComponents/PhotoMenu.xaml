@@ -8,23 +8,23 @@
     
     <Grid HorizontalAlignment="Center" MinHeight="50" Width="Auto" VerticalAlignment="Bottom">
         
-        <Button x:Name="autoRun"  Background="Transparent" Height="50" Margin="-180,0,0,10" VerticalAlignment="Bottom" Width="50" BorderThickness="0" ToolTip="Slide show" Click="autoRun_Click">
+        <Button x:Name="autoRun"  Background="Transparent" Height="50" Margin="-200,0,0,10" VerticalAlignment="Bottom" Width="50" BorderThickness="0" ToolTip="Slide show" Click="autoRun_Click">
             <Image x:Name="autoRunIcon" Source="/Icons/auto.png"  Width="30" Height="30"/>
         </Button>
         <Button x:Name="previous" Height="50" Background="Transparent" Margin="10,0,90,10" VerticalAlignment="Bottom" Width="50" Click="previousButton_Click" BorderThickness="0" ToolTip="Previous Picture">
             <Image x:Name="previousButtonIcon" Source="/Icons/left.png" Width="30" Height="30"/>
         </Button>
-        <Button x:Name="background" Background="Transparent"  Height="50" Width="50" Margin="10,0,0,10" VerticalAlignment="Bottom" Click="backgroundButton_Click" BorderThickness="0" ToolTip="Set as wallpaper">
+        <Button x:Name="background" Background="Transparent"  Height="50" Width="50" Margin="30,0,0,10" VerticalAlignment="Bottom" Click="backgroundButton_Click" BorderThickness="0" ToolTip="Set as wallpaper">
             <Image x:Name="wallPaperButtonIcon" Source="/Icons/wallpaper.png"  Width="30" Height="30"/>
         </Button>
-        <Button x:Name="nextButton"  Background="Transparent" Height="50" Margin="90,0,0,10" VerticalAlignment="Bottom" Width="50" Click="nextButton_Click" BorderThickness="0" ToolTip="Next Picture">
+        <Button x:Name="nextButton"  Background="Transparent" Height="50" Margin="140,0,0,10" VerticalAlignment="Bottom" Width="50" Click="nextButton_Click" BorderThickness="0" ToolTip="Next Picture">
             <Image x:Name="nextButtonIcon" Source="/Icons/right.png" Width="30" Height="30"/>
         </Button>
-        <Button x:Name="leftRotate" Background="Transparent" Height="50" Margin="170,0,0,10" VerticalAlignment="Bottom" Width="50" Click="leftRotate_Click" BorderThickness="0" ToolTip="Rotate left">
+        <Button x:Name="leftRotate" Background="Transparent" Height="50" Margin="250,0,0,10" VerticalAlignment="Bottom" Width="50" Click="leftRotate_Click" BorderThickness="0" ToolTip="Rotate left">
             <Image x:Name="leftRotateIcon" Source="/Icons/rotate_left.gif" Width="30" Height="30"/>
         </Button>
         
-        <Button x:Name="rightRotate" Height="50" Background="Transparent" Margin="260,0,0,10" VerticalAlignment="Bottom" Width="50" Click="rightRotate_Click" BorderThickness="0" ToolTip="Rotate right">
+        <Button x:Name="rightRotate" Height="50" Background="Transparent" Margin="350,0,0,10" VerticalAlignment="Bottom" Width="50" Click="rightRotate_Click" BorderThickness="0" ToolTip="Rotate right">
             <Image x:Name="rightRotateIcon" Source="/Icons/rotate_right.gif" Width="30" Height="30"/>
         </Button>
         
