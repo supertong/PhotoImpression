@@ -64,7 +64,7 @@
             <Controls:ProgressRing Name="ring" IsActive="True" RenderTransformOrigin="0.883,0.583"   VerticalAlignment="Center" HorizontalAlignment="Center" />
 
  
-
+        </Grid>
  
     </Grid>
 </UserControl>
