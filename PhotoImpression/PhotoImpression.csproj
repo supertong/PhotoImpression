@@ -100,9 +100,6 @@
     <Compile Include="ViewComponents\FlickrSearch.xaml.cs">
       <DependentUpon>FlickrSearch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewComponents\Gallery.xaml.cs">
-      <DependentUpon>Gallery.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewComponents\LeftMenuPanel.xaml.cs">
       <DependentUpon>LeftMenuPanel.xaml</DependentUpon>
     </Compile>
@@ -127,10 +124,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewComponents\FlickrSearch.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ViewComponents\Gallery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,8 +183,11 @@
     <Content Include="opencv_core242.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-
-	<Content Include="Transitionals.dll" />    <Content Include="SQLite.Designer.dll" />
+    <Content Include="opencv_imgproc242.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Transitionals.dll" />
+    <Content Include="SQLite.Designer.dll" />
     <Content Include="System.Data.SQLite.dll" />
     <Content Include="System.Data.SQLite.Linq.dll" />
   </ItemGroup>
@@ -215,11 +211,4 @@
     <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

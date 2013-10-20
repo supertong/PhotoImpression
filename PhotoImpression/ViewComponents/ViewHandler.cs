@@ -11,7 +11,7 @@ namespace PhotoImpression.ViewComponents
     public static class ViewHandler
     {
         private static LeftMenuPanel _leftMenuPanel;
-        private static Gallery _gallery;
+        
         private static FlickrSearch _flickrSearch;
         private static PhotoGallery _photoGallery;
         private static PhotoPresent _photoPresent;
@@ -55,18 +55,6 @@ namespace PhotoImpression.ViewComponents
             }
         }
 
-        public static UserControl Gallery
-        {
-            get
-            {
-                if (_gallery == null)
-                {
-                    Console.WriteLine("Creating new gallery");
-                    _gallery = new Gallery();
-                }
-                return _gallery;
-            }
-        }
 
         public static UserControl FlickrSearch
         {
