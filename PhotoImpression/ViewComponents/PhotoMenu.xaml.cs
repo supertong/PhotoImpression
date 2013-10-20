@@ -81,22 +81,22 @@ namespace PhotoImpression.ViewComponents
         public void setBackGround()
         {
             BitmapImage bitmapImg = PhotoPresent.Singleton.imageContainer.Source as BitmapImage;
-            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+            
             encoder.Frames.Add(BitmapFrame.Create(bitmapImg));
             System.Drawing.Image img;
             using (MemoryStream ms = new MemoryStream())
             {
                 encoder.Save(ms);
                 img = System.Drawing.Image.FromStream(ms);
+                var currentPath = System.Environment.CurrentDirectory;
+
+                //create directory for wallpaper
+                System.IO.Directory.CreateDirectory(currentPath + "\\backgroundImage\\");
+
+                img.Save(currentPath.ToString() + "\\backgroundImage\\background.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+                SystemParametersInfo(20, 0, currentPath.ToString() + "\\backgroundImage\\background.bmp", 0x2);
             }
-
-            var currentPath = System.Environment.CurrentDirectory;
-            
-            //create directory for wallpaper
-            System.IO.Directory.CreateDirectory(currentPath + "\\backgroundImage\\");
-
-            img.Save(currentPath.ToString() + "\\backgroundImage\\background.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
-            SystemParametersInfo(20, 0, currentPath.ToString() + "\\backgroundImage\\background.bmp", 0x2);
         }
 
     }
