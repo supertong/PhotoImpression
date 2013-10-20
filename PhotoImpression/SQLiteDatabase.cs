@@ -112,7 +112,8 @@ namespace PhotoImpression
             connecction.Open();
             SQLiteCommand cmd = new SQLiteCommand(sql, connecction);
             SQLiteDataReader reader = cmd.ExecuteReader();
-            reader.Read();
+            if (!reader.Read())
+                return null;
             byte[] byteArray = reader["data"] as byte[];
             ImageConverter ic = new ImageConverter();
             Image img = (Image)ic.ConvertFrom(byteArray);
