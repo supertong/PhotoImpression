@@ -33,10 +33,8 @@ namespace PhotoImpression.ViewComponents
         }
 
         private void onLoad(object sender, RoutedEventArgs e)
-        {
-
-            
-            browser = new PhotoBrowser(sender, e, imageContainer);
+        {         
+            //browser = new PhotoBrowser(sender, e, imageContainer);
             String IconPath = "pack://application:,,,/Icons/";
 
             //dynamic load the icon from current working directory
@@ -63,8 +61,10 @@ namespace PhotoImpression.ViewComponents
             double width = System.Windows.SystemParameters.WorkArea.Width;
             double height = System.Windows.SystemParameters.WorkArea.Height;
 
-            this.Width = width;
-            this.Height = height;
+            Window main = Application.Current.MainWindow;
+
+            //this.Width = main.Width;
+           // this.Height = main.Height;
 
             browser.autoRunImage();
         }

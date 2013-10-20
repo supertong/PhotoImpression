@@ -8,7 +8,7 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
+        
         <controll:LeftMenuPanel Grid.Column="0" />
         <ContentPresenter x:Name="rightPanel" Grid.Column="1" />
     </Grid>

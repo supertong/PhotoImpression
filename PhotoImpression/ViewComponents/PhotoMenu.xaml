@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="PhotoImpression.ViewComponents.PhotoMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Width="auto" Height="auto">
+    
+    <Grid HorizontalAlignment="Center" MinHeight="50" Width="auto" VerticalAlignment="Bottom">
+        
+        <Button x:Name="autoRun"  Background="Transparent" Height="30" Margin="-160,0,0,10" VerticalAlignment="Bottom" Width="30" BorderThickness="0" ToolTip="Slide show" Click="autoRun_Click">
+            <Image x:Name="autoRunIcon" Source="/Icons/auto.png"  Width="30" Height="30"/>
+        </Button>
+        <Button x:Name="nextButton"  Background="Transparent" Height="30" Margin="50,0,0,10" VerticalAlignment="Bottom" Width="30" Click="nextButton_Click" BorderThickness="0" ToolTip="Next Picture">
+            <Image x:Name="nextButtonIcon" Source="/Icons/right.png" Width="30" Height="30"/>
+        </Button>
+        <Button x:Name="background" Background="Transparent"  Height="30" Width="30" Margin="0,0,20,10" VerticalAlignment="Bottom" Click="backgroundButton_Click" BorderThickness="0" ToolTip="Set as wallpaper">
+            <Image x:Name="wallPaperButtonIcon" Source="/Icons/wallpaper.png"  Width="30" Height="30"/>
+        </Button>
+        <Button x:Name="previous" Height="30" Background="Transparent" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="30" Click="previousButton_Click" BorderThickness="0" ToolTip="Previous Picture">
+            <Image x:Name="previousButtonIcon" Source="/Icons/left.png" Width="30" Height="30"/>
+        </Button>
+        <Button x:Name="rightRotate" Height="30" Background="Transparent" Margin="230,0,0,10" VerticalAlignment="Bottom" Width="30" Click="rightRotate_Click" BorderThickness="0" ToolTip="Rotate right">
+            <Image x:Name="rightRotateIcon" Source="/Icons/rotate_right.gif" Width="30" Height="30"/>
+        </Button>
+        <Button x:Name="leftRotate" Background="Transparent" Height="30" Margin="0,0,-140,10" VerticalAlignment="Bottom" Width="30" Click="leftRotate_Click" BorderThickness="0" ToolTip="Rotate left">
+            <Image x:Name="leftRotateIcon" Source="/Icons/rotate_left.gif" Width="30" Height="30"/>
+        </Button>
+    </Grid>
+</UserControl>

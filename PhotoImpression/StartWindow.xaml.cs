@@ -44,7 +44,7 @@ namespace PhotoImpression
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // set Gallery as the default user control for displaying
-            swithRightPanel(ViewHandler.Gallery);
+            swithRightPanel(ViewHandler.PhotoGallery);
         }
     }
 }
