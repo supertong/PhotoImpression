@@ -217,9 +217,6 @@ namespace PhotoImpression.ViewComponents
         {
             browser.oil_painting();
         }
-
-     
- 
     
     }
 
