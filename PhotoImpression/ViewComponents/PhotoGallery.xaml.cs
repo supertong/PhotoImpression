@@ -16,23 +16,34 @@ using System.Windows.Shapes;
 namespace PhotoImpression.ViewComponents
 {
     /// <summary>
-    /// Interaction logic for LeftMenuPanel.xaml
+    /// Interaction logic for PhotoGallery.xaml
     /// </summary>
-    public partial class LeftMenuPanel : UserControl
+    public partial class PhotoGallery : UserControl
     {
-        public LeftMenuPanel()
+        public static PhotoGallery me;
+
+        public PhotoGallery()
         {
             InitializeComponent();
+            me = this;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public static PhotoGallery Singleton
         {
-            StartWindow.Singleton.swithRightPanel(ViewHandler.FlickrSearch);
+            get
+            {
+                return me;
+            }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        public void swithPhoto(UserControl userControll)
         {
-            StartWindow.Singleton.swithRightPanel(ViewHandler.PhotoGallery);
+            TransitionBox.Content = userControll;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            swithPhoto(ViewHandler.PhotoPresent);
         }
     }
 }

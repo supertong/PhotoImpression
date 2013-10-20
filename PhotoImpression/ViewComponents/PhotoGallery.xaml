@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="PhotoImpression.ViewComponents.PhotoGallery"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controll="clr-namespace:PhotoImpression.ViewComponents"
+             xmlns:trans="clr-namespace:Transitionals;assembly=Transitionals"
+            xmlns:transc="clr-namespace:Transitionals.Controls;assembly=Transitionals"
+            xmlns:transt="clr-namespace:Transitionals.Transitions;assembly=Transitionals"
+            xmlns:refl="clr-namespace:System.Reflection;assembly=mscorlib"
+             mc:Ignorable="d" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="650" MinHeight="430" Height="auto" Width="auto" Loaded="UserControl_Loaded" > 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="430" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <controll:PhotoMenu Grid.Row="1"/>
+        
+        <transc:TransitionElement x:Name="TransitionBox" Grid.Row="0">
+            <transc:TransitionElement.TransitionSelector>
+                <trans:RandomTransitionSelector>
+                    <transt:CheckerboardTransition Duration="Automatic"/>
+                    <transt:DiamondsTransition Duration="Automatic"/>
+                    <transt:DotsTransition  Duration="Automatic" />
+                    <transt:ExplosionTransition Duration="00:00:01" FieldOfView="20"/>
+                    <transt:FadeAndGrowTransition Duration="Automatic"/>
+                    <transt:HorizontalBlindsTransition Duration="Automatic"/>
+                    <transt:VerticalBlindsTransition Duration="Automatic"/>
+                    <transt:TranslateTransition StartPoint="-1,0" EndPoint="0,0" Duration="Automatic"/>
+                </trans:RandomTransitionSelector>
+            </transc:TransitionElement.TransitionSelector>
+            </transc:TransitionElement>
+    </Grid>
+</UserControl>
