@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -60,6 +62,25 @@ namespace PhotoImpression.ViewComponents
         {
             Console.WriteLine("Searching for keyword: " + this.keyword.Text);
             this.Flickr_Search(this.keyword.Text);
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem myListBoxItem = (ListBoxItem)(ImageGallery.ItemContainerGenerator.ContainerFromItem(ImageGallery.Items.CurrentItem));
+            Photo photo = myListBoxItem.DataContext as Photo;
+
+            var request = WebRequest.Create(photo.LargeUrl);
+            Console.WriteLine("Saving image from uri: " + photo.LargeUrl);
+            byte[] byteArray;
+            using (var response = request.GetResponse())
+            using (var stream = response.GetResponseStream())
+            {
+                var ms = new MemoryStream();
+                stream.CopyTo(ms);
+                byteArray = ms.ToArray();
+                SQLiteDatabase database = new SQLiteDatabase();
+                database.saveImageData(photo.Title, byteArray);
+            }
         }
     }
 }
