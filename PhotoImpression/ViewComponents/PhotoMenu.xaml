@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             Width="auto" Height="auto">
+             Width="Auto" Height="Auto">
     
-    <Grid HorizontalAlignment="Center" MinHeight="50" Width="auto" VerticalAlignment="Bottom">
+    <Grid HorizontalAlignment="Center" MinHeight="50" Width="Auto" VerticalAlignment="Bottom">
         
         <Button x:Name="autoRun"  Background="Transparent" Height="30" Margin="-160,0,0,10" VerticalAlignment="Bottom" Width="30" BorderThickness="0" ToolTip="Slide show" Click="autoRun_Click">
             <Image x:Name="autoRunIcon" Source="/Icons/auto.png"  Width="30" Height="30"/>

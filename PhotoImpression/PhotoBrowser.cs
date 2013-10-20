@@ -124,11 +124,6 @@ namespace PhotoImpression
             
         }
 
-        //private void time_tick(object sender, EventArgs e)
-        //{
-        //    this.NextPhoto();
-        //}
-
         [DllImport("user32.dll", EntryPoint = "SystemParametersInfo")]
         public static extern int SystemParametersInfo(
              int uAction,
@@ -184,6 +179,7 @@ namespace PhotoImpression
          */
         public Image<Bgr, Byte> currentPhoto()
         {
+            
             Image<Bgr, Byte> image = new Image<Bgr, Byte>(images[counter]);
             return image;
         }

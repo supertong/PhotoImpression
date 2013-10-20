@@ -8,10 +8,10 @@
             xmlns:transc="clr-namespace:Transitionals.Controls;assembly=Transitionals"
             xmlns:transt="clr-namespace:Transitionals.Transitions;assembly=Transitionals"
             xmlns:refl="clr-namespace:System.Reflection;assembly=mscorlib"
-             mc:Ignorable="d" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="650" MinHeight="430" Height="auto" Width="auto" Loaded="UserControl_Loaded" > 
+             mc:Ignorable="d" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="430" Margin="30,0,0,0" Height="Auto" Width="Auto" Loaded="UserControl_Loaded" > 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="430" />
+            <RowDefinition MinHeight="430"/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
