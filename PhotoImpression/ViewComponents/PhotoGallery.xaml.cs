@@ -45,5 +45,7 @@ namespace PhotoImpression.ViewComponents
         {
             swithPhoto(ViewHandler.PhotoPresent);
         }
+
+ 
     }
 }
