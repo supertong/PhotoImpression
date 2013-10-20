@@ -8,18 +8,18 @@
             xmlns:transc="clr-namespace:Transitionals.Controls;assembly=Transitionals"
             xmlns:transt="clr-namespace:Transitionals.Transitions;assembly=Transitionals"
             xmlns:refl="clr-namespace:System.Reflection;assembly=mscorlib"
-             mc:Ignorable="d" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="430" Margin="15,0,0,0" Height="Auto" Width="Auto" Loaded="UserControl_Loaded" > 
+             mc:Ignorable="d" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="430" Margin="15,0,0,0" Height="700" Width="950" Loaded="UserControl_Loaded" > 
     <Grid Width="950">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="800"></ColumnDefinition>
             <ColumnDefinition Width="150"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <transc:TransitionElement x:Name="TransitionBox" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="500"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+                <transc:TransitionElement x:Name="TransitionBox" Grid.Row="0">
                     <transc:TransitionElement.TransitionSelector>
                         <trans:RandomTransitionSelector>
                             <transt:CheckerboardTransition Duration="Automatic"/>
@@ -33,9 +33,9 @@
                         </trans:RandomTransitionSelector>
                     </transc:TransitionElement.TransitionSelector>
                 </transc:TransitionElement>
+            <controll:PhotoMenu Grid.Row="1"/>
         </Grid>
-        <controll:PhotoMenu Grid.Row="1"/>
         <controll:ToolBoxMenu Grid.Column="1"/>
     </Grid>
-    
+
 </UserControl>

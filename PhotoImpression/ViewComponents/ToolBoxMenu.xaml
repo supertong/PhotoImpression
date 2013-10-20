@@ -8,18 +8,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="16"/>
-            <RowDefinition Height="0"/>
-            <RowDefinition Height="0"/>
-            <RowDefinition Height="0"/>
-            <RowDefinition Height="13"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Button Content="photo plate" Grid.Row="0" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="92" Click="Button_Click"/>
         <Button Content="Emboss" Grid.Row="1" HorizontalAlignment="Left" Width="92" Margin="0,10,0,0" Click="Button_Click_1"/>
-        <Button Content="Blur" Grid.Row="2" HorizontalAlignment="Left" Width="92" Margin="0,10,0,0" Grid.RowSpan="5" Height="19" VerticalAlignment="Top" Click="Button_Click_2"/>
-        <Button Content="Sharpen" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Top" Width="92" Margin="0,10,0,0" Click="Button_Click_3" />
-        <Button Content="oil painting" Grid.Row="8" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="92" Margin="0,10,0,0" Click="Button_Click_4"/>
+        <Button Content="Blur" Grid.Row="2" HorizontalAlignment="Left" Width="92" Margin="0,10,0,0" Height="19" VerticalAlignment="Top" Click="Button_Click_2"/>
+        <Button Content="Sharpen" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="0,10,0,0" Click="Button_Click_3" />
+        <Button Content="oil painting" Grid.Row="4" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="92" Margin="0,10,0,0" Click="Button_Click_4"/>
     </Grid>
 </UserControl>

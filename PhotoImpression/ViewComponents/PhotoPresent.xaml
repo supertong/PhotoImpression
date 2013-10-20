@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
     <Grid Background="Transparent" Height="auto" MinHeight="430" MinWidth="650" Width="800" MaxWidth="600">
-        <Image x:Name="imageContainer"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,25,0,50" Loaded="imageContainer_Loaded" >
+        <Image x:Name="imageContainer"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,25,0,10" Loaded="imageContainer_Loaded" >
             <Image.RenderTransform>
                 <TransformGroup x:Name="imageTransformGroup">
                     <ScaleTransform/>
