@@ -47,6 +47,12 @@
     <Reference Include="FlickrNet">
       <HintPath>$(ProgramFiles)\FlickrNet.dll</HintPath>
     </Reference>
+	<Reference Include="System.Data.SQLite">
+      <HintPath>$(ProgramFiles)\System.Data.SQLite.dll</HintPath>
+    </Reference>
+	<Reference Include="System.Data.SQLite.Linq">
+      <HintPath>$(ProgramFiles)\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
@@ -74,6 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SQLiteDatabase.cs" />
     <Compile Include="StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>
@@ -151,6 +158,9 @@
     <Content Include="opencv_core242.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="SQLite.Designer.dll" />
+    <Content Include="System.Data.SQLite.dll" />
+    <Content Include="System.Data.SQLite.Linq.dll" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\auto.png" />
@@ -167,6 +177,9 @@
     <Resource Include="Icons\rotate_left.gif" />
     <Resource Include="Icons\rotate_right.gif" />
     <Resource Include="Icons\wallpaper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

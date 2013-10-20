@@ -10,7 +10,13 @@
         </ItemsPanelTemplate>
 
         <DataTemplate x:Key="ListImageDataTemplate">
-            <Grid HorizontalAlignment="Center" Width="Auto" Height="Auto">
+            <Grid HorizontalAlignment="Center" Width="Auto" Height="Auto" >
+                <!-- Context Menu -->
+                <Grid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Save" Click="MenuItem_Click"></MenuItem>
+                    </ContextMenu>
+                </Grid.ContextMenu>
                 <Border Padding="5" Margin="10" BorderBrush="Orange">
                     <!--Bind Image Path in Image Control-->
                     <Image Source="{Binding SquareThumbnailUrl, IsAsync=True}"  HorizontalAlignment="Center" >
@@ -50,7 +56,7 @@
                     Margin="10,5,0,0" Click="Button_Click"
                     >Search</Button>
         </StackPanel>
-        <ListBox Grid.Row="1" x:Name="ImageGallery" ItemsSource="{Binding}" ItemsPanel="{DynamicResource ImageGalleryItemsPanelTemplate}" ItemTemplate="{StaticResource ListImageDataTemplate}" BorderThickness="0">
+        <ListBox Grid.Row="1" x:Name="ImageGallery" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" ItemsPanel="{DynamicResource ImageGalleryItemsPanelTemplate}" ItemTemplate="{StaticResource ListImageDataTemplate}" BorderThickness="0">
 
         </ListBox>
     </Grid>
