@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,6 +23,7 @@ namespace PhotoImpression.ViewComponents
     /// </summary>
     public partial class PhotoMenu : UserControl
     {
+        private int degree = 0;
 
         public PhotoMenu()
         {
@@ -37,35 +40,64 @@ namespace PhotoImpression.ViewComponents
 
         void timer_Tick(object sender, EventArgs e)
         {
-            int counter = PhotoPresent.getIndex();
-            PhotoGallery.Singleton.swithPhoto(new PhotoPresent(++counter));
+            PhotoGallery.Singleton.swithPhoto(new PhotoPresent());
         }
 
         private void nextButton_Click(object sender, RoutedEventArgs e)
         {
-            int counter = PhotoPresent.getIndex();
-            PhotoGallery.Singleton.swithPhoto(new PhotoPresent(++counter));
+            PhotoGallery.Singleton.swithPhoto(new PhotoPresent());
         }
 
         private void backgroundButton_Click(object sender, RoutedEventArgs e)
         {
-            PhotoPresent.setWallpaper();
+            this.setBackGround();
         }
 
         private void previousButton_Click(object sender, RoutedEventArgs e)
         {
-            int counter = PhotoPresent.getIndex();
-            PhotoGallery.Singleton.swithPhoto(new PhotoPresent(--counter));
+            PhotoGallery.Singleton.swithPhoto(new PhotoPresent());
         }
 
         private void rightRotate_Click(object sender, RoutedEventArgs e)
         {
-            PhotoPresent.rightRotate();
+            degree += 90;
+            PhotoPresent.Singleton.imageContainer.LayoutTransform = new RotateTransform(degree);
         }
 
         private void leftRotate_Click(object sender, RoutedEventArgs e)
         {
-            PhotoPresent.leftRotate();
+            degree -= 90;
+            PhotoPresent.Singleton.imageContainer.LayoutTransform = new RotateTransform(degree);
         }
+
+        [DllImport("user32.dll", EntryPoint = "SystemParametersInfo")]
+        public static extern int SystemParametersInfo(
+             int uAction,
+             int uParam,
+             string lpvParam,
+             int fuWinIni
+         );
+
+        public void setBackGround()
+        {
+            BitmapImage bitmapImg = PhotoPresent.Singleton.imageContainer.Source as BitmapImage;
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmapImg));
+            System.Drawing.Image img;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                img = System.Drawing.Image.FromStream(ms);
+            }
+
+            var currentPath = System.Environment.CurrentDirectory;
+            
+            //create directory for wallpaper
+            System.IO.Directory.CreateDirectory(currentPath + "\\backgroundImage\\");
+
+            img.Save(currentPath.ToString() + "\\backgroundImage\\background.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            SystemParametersInfo(20, 0, currentPath.ToString() + "\\backgroundImage\\background.bmp", 0x2);
+        }
+
     }
 }

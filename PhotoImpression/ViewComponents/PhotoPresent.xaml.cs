@@ -20,17 +20,15 @@ namespace PhotoImpression
     /// </summary>
     public partial class PhotoPresent : UserControl
     {
-        private static PhotoBrowser browser;
-        private static int index = 1;
         private SQLiteDatabase database;
         public static PhotoPresent me;
 
-        
         public PhotoPresent()
         {
             InitializeComponent();
             me = this;
             database = new SQLiteDatabase();
+            imageContainer.Source = database.getRandomImageFromDatabase();
         }
 
         public static PhotoPresent Singleton
@@ -41,34 +39,21 @@ namespace PhotoImpression
             }
         }
 
-        public static int getIndex() {
-            return index;
-        }
-
-        public PhotoPresent(int counter) {
-            index = counter;
-            InitializeComponent();
-        }
-
         public static void autoRun() {
-            browser.autoRunImage();
-        }
-
-        public static void rightRotate() {
-            browser.RightRotate();
+            //browser.autoRunImage();
         }
 
         public static void leftRotate() {
-            browser.LeftRotate();
+            //browser.LeftRotate();
         }
 
         public static void setWallpaper() {
-            browser.setBackGround();
+            //browser.setBackGround();
         }
 
         private void imageContainer_Loaded(object sender, RoutedEventArgs e)
         {
-            imageContainer.Source = database.getRandomImageFromDatabase();
+            
         }
 
     }
