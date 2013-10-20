@@ -19,59 +19,23 @@ namespace PhotoImpression
 {
     class PhotoBrowser
     {
-        private int counter;    //counter for record the index of image
-        private String[] images; //array of string store image path
-        private int degree;     //controll the image rotate degree,
-        private System.Windows.Controls.Image imageContainer;   //container for the images
-        private Config config;
-
+        private string[] images;
         //constructor
-        public PhotoBrowser(object sender, RoutedEventArgs e, System.Windows.Controls.Image container,ref int index) {
-           
-            //declare teh config
-            config = new Config();
+        public PhotoBrowser(object sender, RoutedEventArgs e) {
+           string path = folderBrowser(sender, e);
 
-            //read the path from config file
-            var path = config.ReadConfig("path");
-
-            //if it is null, let user define
-            if (path == null)
-            {
-                path = folderBrowser(sender, e);
-                //when path not defined
-                while (path == null)
-                {
-                    path = folderBrowser(sender, e);
-                }
-                //get all images from path
-                images = GetImagesFrom(path, true);
-                //if there is no image
-                while (images.Length <= 0)
-                {
-                    System.Windows.MessageBox.Show("There is no photos in this directory!try again");
-                    path = folderBrowser(sender, e);
-                    images = GetImagesFrom(path, true);
-                }
-                //write the path to config file
-                config.WriteConfig("path", path);
-            }
-
-            //get all images from path
-            images = GetImagesFrom(path, true);
-
-            imageContainer = container;
-            if (index >= images.Length)
-                index = 0;
-            if (index < 0)
-                index = images.Length - 1;
-
-            //display the first image
-            imageContainer.Source = this.retriveImage(images[index]);
-
-            counter = 0;
-            degree = 0;
+           if (path == null)
+               images = null;
+           else
+           {
+               //get all images from path
+               images = GetImagesFrom(path, true);
+           }
         }
 
+        public string[] getImages() {
+            return this.images;
+        }
         /*
          * Function return the path of folder selected
          * return a folder path
@@ -112,275 +76,19 @@ namespace PhotoImpression
         /*
          * function to return image to image container by image path with name
          * **/
-        public BitmapSource retriveImage(string imgName)
+        public byte[] retriveImage(string imgName)
         {
-            Image<Bgr, Byte> image = new Image<Bgr, Byte>(imgName);
-            
-            return ToBitmapSource(image);
+            MemoryStream ms = new MemoryStream();
+            FileStream fs = new FileStream(imgName, FileMode.Open, FileAccess.Read);
+            ms.SetLength(fs.Length);
+            fs.Read(ms.GetBuffer(), 0, (int)fs.Length);
+
+            ms.Flush();
+            fs.Close();
+
+            return ms.ToArray();
         }
-
-        public void autoRunImage()
-        {
-            
-        }
-
-        [DllImport("user32.dll", EntryPoint = "SystemParametersInfo")]
-        public static extern int SystemParametersInfo(
-             int uAction,
-             int uParam,
-             string lpvParam,
-             int fuWinIni
-         ); 
-
-        public void setBackGround() {
-            System.Drawing.Image img = System.Drawing.Image.FromFile(images[counter]);
-            var currentPath = System.Environment.CurrentDirectory;
-            
-            //create directory for wallpaper
-            System.IO.Directory.CreateDirectory(currentPath + "\\backgroundImage\\");
-
-            img.Save(currentPath.ToString()+"\\backgroundImage\\background.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
-            SystemParametersInfo(20, 0, currentPath.ToString() + "\\backgroundImage\\background.bmp", 0x2);
-        }
-
-        public void ZoomIn(double scale,ScaleTransform transform) {
-            transform.ScaleX *= scale;
-            transform.ScaleY *= scale;
-        }
-
-        public void ZoomOut(double scale, ScaleTransform transform) {
-            transform.ScaleX /= scale;
-            transform.ScaleY /= scale;
-        }
-
-        public void clearTransform() {
-            imageContainer.LayoutTransform = new RotateTransform(0);
-        }
-
-        /**
-         rotate image to right
-         */
-        public void RightRotate() {
-            degree += 90;
-
-            imageContainer.LayoutTransform = new RotateTransform(degree);
-        }
-
-        /*
-         * rotate image to left
-         * **/
-        public void LeftRotate() {
-            degree += -90;
-            imageContainer.LayoutTransform = new RotateTransform(degree);
-        }
-
-        /**
-         *add function to get current displayed photo
-         */
-        public Image<Bgr, Byte> currentPhoto()
-        {
-            
-            Image<Bgr, Byte> image = new Image<Bgr, Byte>(images[counter]);
-            return image;
-        }
-
-        public int showPhoto(int index) {
-            if (index >= images.Length)
-                index = 0;
-            if (index < 0)
-                index = images.Length - 1;
-
-            imageContainer.Source = this.retriveImage(images[index]);
-
-            return index;
-        }
-        /*
-         * Return the next photo
-         * **/
-        public void NextPhoto() {
-            counter++;
-            if (counter >= images.Length)
-                counter = 0;
-            imageContainer.Source =  this.retriveImage(images[counter]);
-        }
-
-        /*
-         * return the previous photo
-         * **/
-        public void PreviousPhoto()
-        {
-            counter--;
-            if (counter < 0)
-                counter = images.Length-1;
-            imageContainer.Source =  this.retriveImage(images[counter]);
-        }
-
-        public void photographic_plate()
-        {
-            System.Drawing.Color  pixel;
-            
-         
-            Bitmap oldbitmap = currentPhoto().ToBitmap();
-            Bitmap newbitmap = new Bitmap(oldbitmap.Width, oldbitmap.Height);
-            for (int x = 1; x < oldbitmap.Width; x++)
-            {
-                for (int y = 1; y < oldbitmap.Height; y++)
-                {
-                    int r, g, b;
-                    pixel = oldbitmap.GetPixel(x, y);
-                    r = 255 - pixel.R;
-                    g = 255 - pixel.G;
-                    b = 255 - pixel.B;
-                    newbitmap.SetPixel(x, y, System.Drawing.Color.FromArgb(r, g, b));
-                }
-            }
-
-            imageContainer.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(newbitmap.GetHbitmap(), IntPtr.Zero, System.Windows.Int32Rect.Empty, BitmapSizeOptions.FromWidthAndHeight(newbitmap.Width, newbitmap.Height));
-
-        }
-
-        public void emboss()
-        {
-            Bitmap oldbitmap = currentPhoto().ToBitmap();
-            Bitmap newbitmap = new Bitmap(oldbitmap.Width, oldbitmap.Height);
-            System.Drawing.Color pixel1, pixel2;
-            for (int x = 0; x < oldbitmap.Width - 1; x++)
-            {
-                for (int y = 0; y < oldbitmap.Height - 1; y++)
-                {
-                    int r = 0, g = 0, b = 0;
-                    pixel1 = oldbitmap.GetPixel(x, y);
-                    pixel2 = oldbitmap.GetPixel(x + 1, y + 1);
-                    r = Math.Abs(pixel1.R - pixel2.R + 128);
-                    g = Math.Abs(pixel1.G - pixel2.G + 128);
-                    b = Math.Abs(pixel1.B - pixel2.B + 128);
-                    if (r > 255)
-                        r = 255;
-                    if (r < 0)
-                        r = 0;
-                    if (g > 255)
-                        g = 255;
-                    if (g < 0)
-                        g = 0;
-                    if (b > 255)
-                        b = 255;
-                    if (b < 0)
-                        b = 0;
-                    newbitmap.SetPixel(x, y, System.Drawing.Color.FromArgb(r, g, b));
-                }
-            }
-
-            imageContainer.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(newbitmap.GetHbitmap(), IntPtr.Zero, System.Windows.Int32Rect.Empty, BitmapSizeOptions.FromWidthAndHeight(newbitmap.Width, newbitmap.Height));
-                
-        }
-
-        public void blur()
-        {
-            Bitmap oldbitmap = currentPhoto().ToBitmap();
-            Bitmap newbitmap = new Bitmap(oldbitmap.Width, oldbitmap.Height);
-            System.Drawing.Color pixel;
-          
-            int[] Gauss = { 1, 2, 1, 2, 4, 2, 1, 2, 1 };
-            for (int x = 1; x < oldbitmap.Width - 1; x++)
-                for (int y = 1; y < oldbitmap.Height - 1; y++)
-                {
-                    int r = 0, g = 0, b = 0;
-                    int Index = 0;
-                    for (int col = -1; col <= 1; col++)
-                        for (int row = -1; row <= 1; row++)
-                        {
-                            pixel = oldbitmap.GetPixel(x + row, y + col);
-                            r += pixel.R * Gauss[Index];
-                            g += pixel.G * Gauss[Index];
-                            b += pixel.B * Gauss[Index];
-                            Index++;
-                        }
-                    r /= 16;
-                    g /= 16;
-                    b /= 16;
-                   
-                    r = r > 255 ? 255 : r;
-                    r = r < 0 ? 0 : r;
-                    g = g > 255 ? 255 : g;
-                    g = g < 0 ? 0 : g;
-                    b = b > 255 ? 255 : b;
-                    b = b < 0 ? 0 : b;
-                    newbitmap.SetPixel(x - 1, y - 1, System.Drawing.Color.FromArgb(r, g, b));
-                }
-            imageContainer.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(newbitmap.GetHbitmap(), IntPtr.Zero, System.Windows.Int32Rect.Empty, BitmapSizeOptions.FromWidthAndHeight(newbitmap.Width, newbitmap.Height));
-
-
-        }
-
-        public void sharpen()
-        {
-            Bitmap oldbitmap = currentPhoto().ToBitmap();
-            Bitmap newbitmap = new Bitmap(oldbitmap.Width, oldbitmap.Height);
-            System.Drawing.Color pixel;
-
-            int[] Laplacian = { -1, -1, -1, -1, 9, -1, -1, -1, -1 };
-            for (int x = 1; x < oldbitmap.Width - 1; x++)
-                for (int y = 1; y < oldbitmap.Height - 1; y++)
-                {
-                    int r = 0, g = 0, b = 0;
-                    int Index = 0;
-                    for (int col = -1; col <= 1; col++)
-                        for (int row = -1; row <= 1; row++)
-                        {
-                            pixel = oldbitmap.GetPixel(x + row, y + col); r += pixel.R * Laplacian[Index];
-                            g += pixel.G * Laplacian[Index];
-                            b += pixel.B * Laplacian[Index];
-                            Index++;
-                        }
-
-                    r = r > 255 ? 255 : r;
-                    r = r < 0 ? 0 : r;
-                    g = g > 255 ? 255 : g;
-                    g = g < 0 ? 0 : g;
-                    b = b > 255 ? 255 : b;
-                    b = b < 0 ? 0 : b;
-                    newbitmap.SetPixel(x - 1, y - 1, System.Drawing.Color.FromArgb(r, g, b));
-                }
-
-            imageContainer.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(newbitmap.GetHbitmap(), IntPtr.Zero, System.Windows.Int32Rect.Empty, BitmapSizeOptions.FromWidthAndHeight(newbitmap.Width, newbitmap.Height));
-
-
-        }
-
-        public void oil_painting()
-        {
-            Bitmap oldbitmap = currentPhoto().ToBitmap();
-            Bitmap newbitmap = new Bitmap(oldbitmap.Width, oldbitmap.Height);
-
- 
-            RectangleF rect = new RectangleF(0, 0, oldbitmap.Width, oldbitmap.Height);
-            Bitmap img = oldbitmap.Clone(rect, System.Drawing.Imaging.PixelFormat.DontCare);
-          
-            Random rnd = new Random();
-           
-            int iModel = 2;
-            int i = oldbitmap.Width - iModel;
-            while (i > 1)
-            {
-                int j = oldbitmap.Height - iModel;
-                while (j > 1)
-                {
-                    int iPos = rnd.Next(100000) % iModel;
-                   
-                    System.Drawing.Color color = img.GetPixel(i + iPos, j + iPos);
-                    img.SetPixel(i, j, color);
-                    j = j - 1;
-                }
-                i = i - 1;
-            }
-
-            imageContainer.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(img.GetHbitmap(), IntPtr.Zero, System.Windows.Int32Rect.Empty, BitmapSizeOptions.FromWidthAndHeight(newbitmap.Width, newbitmap.Height));
-
-        }
-
-        /*
-         * Functions from the emgu.cv documents
-         * **/
+        
 
         //functions tobitmapsource from emug cv
         [DllImport("gdi32")]

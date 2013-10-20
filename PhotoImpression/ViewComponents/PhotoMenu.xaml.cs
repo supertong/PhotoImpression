@@ -24,6 +24,7 @@ namespace PhotoImpression.ViewComponents
     public partial class PhotoMenu : UserControl
     {
         private int degree = 0;
+        DispatcherTimer timer;
 
         public PhotoMenu()
         {
@@ -32,7 +33,7 @@ namespace PhotoImpression.ViewComponents
 
         private void autoRun_Click(object sender, RoutedEventArgs e)
         {
-            DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 2) };
+            timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 4) };
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
 
@@ -45,11 +46,15 @@ namespace PhotoImpression.ViewComponents
 
         private void nextButton_Click(object sender, RoutedEventArgs e)
         {
+            if(timer!=null)
+                timer.Stop();
             PhotoGallery.Singleton.swithPhoto(new PhotoPresent());
         }
 
         private void backgroundButton_Click(object sender, RoutedEventArgs e)
         {
+            if(timer != null)
+                timer.Stop();
             this.setBackGround();
         }
 

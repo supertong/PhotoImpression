@@ -34,5 +34,23 @@ namespace PhotoImpression.ViewComponents
         {
             StartWindow.Singleton.swithRightPanel(ViewHandler.PhotoGallery);
         }
+
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+            PhotoBrowser browser = new PhotoBrowser(sender, e);
+            string []paths = browser.getImages();
+            SQLiteDatabase database = new SQLiteDatabase();
+
+            if (paths == null)
+            {
+
+            }
+            else { 
+                foreach(string path in paths){
+                    byte[] dataByte = browser.retriveImage(path);
+                    database.saveImageData(System.IO.Path.GetFileName(path), dataByte);   
+                }
+            }
+        }
     }
 }

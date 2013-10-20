@@ -43,7 +43,7 @@ namespace PhotoImpression.ViewComponents
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            swithPhoto(ViewHandler.PhotoPresent);
+            swithPhoto(new PhotoPresent());
         }
 
  

@@ -14,6 +14,7 @@
             </Label>
             <Button Click="Button_Click_1" BorderThickness="0" ClipToBounds="True" FontSize="24" Cursor="Hand" BorderBrush="White" Background="White">Gallery</Button>
             <Button Click="Button_Click" BorderThickness="0" ClipToBounds="True" FontSize="24" Cursor="Hand" BorderBrush="White" Background="White">Flickr Search</Button>
+            <Button Click="Load_Click" x:Name="load" ClipToBounds="True" FontSize="24" Cursor="Hand" BorderBrush="White" Background="White">Load Form Disk</Button>
         </StackPanel>
     </Grid>
 </UserControl>
