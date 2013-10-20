@@ -7,6 +7,8 @@ using System.Data.SQLite;
 using System.IO;
 using System.Security.Cryptography;
 using System.Windows;
+using System.Windows.Media.Imaging;
+using System.Drawing;
 
 namespace PhotoImpression
 {
@@ -102,6 +104,19 @@ namespace PhotoImpression
             connecction.Close();
 
             Console.WriteLine("Saved");
+        }
+
+        public Image getRandomImageFromDatabase()
+        {
+            string sql = "SELECT * FROM photo ORDER BY RANDOM() LIMIT 1";
+            connecction.Open();
+            SQLiteCommand cmd = new SQLiteCommand(sql, connecction);
+            SQLiteDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            byte[] byteArray = reader["data"] as byte[];
+            ImageConverter ic = new ImageConverter();
+            Image img = (Image)ic.ConvertFrom(byteArray);
+            return img;
         }
     }
 }

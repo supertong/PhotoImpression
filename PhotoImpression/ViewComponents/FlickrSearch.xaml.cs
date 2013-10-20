@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FlickrNet;
+using MahApps.Metro.Controls;
 
 namespace PhotoImpression.ViewComponents
 {
@@ -33,6 +34,7 @@ namespace PhotoImpression.ViewComponents
 
         private void Flickr_Search(string keyword)
         {
+            ring.SetValue(ProgressRing.IsActiveProperty, true);
             ImageGallery.DataContext = null;
             PhotoSearchOptions searchOptions = new PhotoSearchOptions();
             searchOptions.Tags = keyword;
@@ -47,9 +49,11 @@ namespace PhotoImpression.ViewComponents
                 else
                 {
                     ImageGallery.DataContext = callback.Result;
+                    ring.SetValue(ProgressRing.IsActiveProperty , false);
                 }
             });
             Console.WriteLine("Finished searching....");
+            
         }
 
         private void UserControl_Initialized(object sender, EventArgs e)
