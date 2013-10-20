@@ -183,17 +183,13 @@
     <Content Include="opencv_core242.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-<<<<<<< .merge_file_a04988
     <Content Include="opencv_imgproc242.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Transitionals.dll" />
-=======
-
-	<Content Include="Transitionals.dll" />    <Content Include="SQLite.Designer.dll" />
+    <Content Include="SQLite.Designer.dll" />
     <Content Include="System.Data.SQLite.dll" />
     <Content Include="System.Data.SQLite.Linq.dll" />
->>>>>>> .merge_file_a06620
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\auto.png" />
@@ -215,17 +211,4 @@
     <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
