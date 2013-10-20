@@ -57,10 +57,14 @@
                     Margin="10,5,0,0" Click="Button_Click"
                     >Search</Button>
         </StackPanel>
-
+        <Grid Grid.Row="1">
         <ListBox Grid.Row="1" x:Name="ImageGallery" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" ItemsPanel="{DynamicResource ImageGalleryItemsPanelTemplate}" ItemTemplate="{StaticResource ListImageDataTemplate}" BorderThickness="0">
+           
+            </ListBox>
+            <Controls:ProgressRing Name="ring" IsActive="True" RenderTransformOrigin="0.883,0.583"   VerticalAlignment="Center" HorizontalAlignment="Center" />
 
-        </ListBox>
-        <Controls:ProgressRing IsActive="True" Margin="155,35,-85,-36" RenderTransformOrigin="0.883,0.583" Grid.RowSpan="2" />
+ 
+        </Grid>
+ 
     </Grid>
 </UserControl>
