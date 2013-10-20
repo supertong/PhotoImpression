@@ -15,5 +15,10 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
+        <Button Content="photo plate" HorizontalAlignment="Left" Margin="706,108,-148,0" VerticalAlignment="Top" Width="92" Click="Button_Click_1" Height="20"/>
+        <Button Content="Emboss" HorizontalAlignment="Left" Margin="706,133,-148,0" VerticalAlignment="Top" Width="92" Click="Button_Click" Height="20"/>
+        <Button Content="Blur" HorizontalAlignment="Left" Margin="706,158,-148,0" VerticalAlignment="Top" Width="92" Height="20" Click="Button_Click_2"/>
+        <Button Content="Sharpen" HorizontalAlignment="Left" Margin="706,183,-148,0" VerticalAlignment="Top" Width="92" Height="20" Click="Button_Click_3"/>
+        <Button Content="oil painting" HorizontalAlignment="Left" Margin="706,208,-148,0" VerticalAlignment="Top" Width="92" Click="Button_Click_4" Height="20"/>
     </Grid>
 </UserControl>
