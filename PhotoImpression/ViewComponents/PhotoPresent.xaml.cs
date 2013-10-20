@@ -22,10 +22,12 @@ namespace PhotoImpression
     {
         private static PhotoBrowser browser;
         private static int index = 1;
+        private SQLiteDatabase database;
 
         public PhotoPresent()
         {
             InitializeComponent();
+            database = new SQLiteDatabase();
         }
 
         public static int getIndex() {
@@ -53,54 +55,11 @@ namespace PhotoImpression
             browser.setBackGround();
         }
 
-        private void imageContainer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-           
-        }
-
-        private void imageContainer_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void imageContainer_MouseMove(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void imageContainer_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-
-        }
-
         private void imageContainer_Loaded(object sender, RoutedEventArgs e)
         {
-            browser = new PhotoBrowser(sender, e, imageContainer,ref index);
+            imageContainer.DataContext = database.getRandomImageFromDatabase();
+
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            browser.photographic_plate();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            browser.emboss();
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            browser.blur();
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            browser.sharpen();
-        }
-
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            browser.oil_painting();
-        }
     }
 }
